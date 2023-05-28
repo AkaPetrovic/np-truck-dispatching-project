@@ -1,9 +1,14 @@
 package rs.ac.bg.fon.ai.np.NPServer.repository.db;
 
 import java.io.FileInputStream;
+import java.io.FileReader;
+import java.io.IOException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.util.Properties;
+
+import com.google.gson.Gson;
+import com.google.gson.JsonObject;
 
 public class DbConnectionFactory {
 
@@ -22,13 +27,21 @@ public class DbConnectionFactory {
 
     public Connection getConnection() throws Exception {
         if (connection == null || connection.isClosed()) {
-            Properties properties = new Properties();
-            properties.load(new FileInputStream("src/main/resources/dbconfig.properties"));
-            String url = properties.getProperty("url");
-            String username = properties.getProperty("username");
-            String password = properties.getProperty("password");
-            connection = DriverManager.getConnection(url, username, password);
-            connection.setAutoCommit(false);
+            try (FileReader fr = new FileReader("src/main/resources/dbconfig.json")) {
+            	Gson gson = new Gson();
+            	
+            	JsonObject jsonObject = gson.fromJson(fr, JsonObject.class);
+            	
+            	String url = jsonObject.get("url").getAsString();
+                String username = jsonObject.get("username").getAsString();
+                String password = jsonObject.get("password").getAsString();
+                
+                connection = DriverManager.getConnection(url, username, password);
+                connection.setAutoCommit(false);
+            } catch (IOException e) {
+                e.printStackTrace();
+                throw e;
+            }
         }
         return connection;
     }
