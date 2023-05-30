@@ -3,21 +3,44 @@ package rs.ac.bg.fon.ai.np.NPCommon.domain;
 import java.util.Objects;
 
 /**
+ * Predstavlja drzavu koja se vezuje za odredjenog proizvodjaca kamiona.
+ * 
+ * Sadrzi ID i naziv drzave.
+ * 
+ * @author Aleksa Petrovic
+ * @since 1.1.0
  *
- * @author Aka
  */
 public class Country implements GenericEntity {
+	/**
+	 * ID drzave u vidu Long vrednosti (ceo broj).
+	 */
     private Long id;
+    /**
+     * Naziv drzave kao String.
+     */
     private String name;
 
+    /**
+     * Prazan konstruktor za kreiranje jedne instance drzave sa podrazumevanim vrednostima za njena polja.
+     */
     public Country() {
     }
 
+    /**
+     * Parametrizovani konstruktor koji sluzi za kreiranje instance drzave sa specificnim vrednostima za njena polja.
+     * @param id - ID drzave koji joj se dodaje prilikom njenog kreiranja
+     * @param name - Naziv drzave koji joj se dodaje prilikom njenog kreiranja
+     */
     public Country(Long id, String name) {
         this.id = id;
         this.name = name;
     }
 
+    /**
+     * Vraca ID drzave.
+     * @return id - ID drzave kao Long vrednost (ceo broj).
+     */
     public Long getId() {
         return id;
     }
@@ -26,15 +49,28 @@ public class Country implements GenericEntity {
     public void setId(Long id) {
         this.id = id;
     }
-
+    
+    /**
+     * Vraca naziv drzave.
+     * @return name - Naziv drzave kao String.
+     */
     public String getName() {
         return name;
     }
-
+    
+    /**
+     * Postavlje novu vrednost za atribut name drzave.
+     * @param name - Nova vrednost za atribut name.
+     */
     public void setName(String name) {
         this.name = name;
     }
 
+    /**
+	 * Racuna hash code na osnovu svih atributa drzave.
+	 * 
+	 * @return hash - Hash code izracunat na osnovu svih atributa drzave.
+	 */
     @Override
     public int hashCode() {
         int hash = 3;
@@ -43,6 +79,16 @@ public class Country implements GenericEntity {
         return hash;
     }
 
+    /**
+	 * Poredi dve drzave prema svim atributima.
+	 * 
+	 * @param obj - Predstavlja (drugi) objekat sa kojim ce se porediti instanca drzave nad kojom je pozvana metoda equals().
+	 * @return 
+	 * <ul>
+	 * 		<li> true - ako je unet isti objekat ili ako su svi atributi isti </li>
+	 * 		<li> false - ako je unet null objekat ili ako uneti objekat nije klase Country ili ako se uneti objekat razlikuje po vrednosti nekog atributa </li>
+	 * </ul>
+	 */
     @Override
     public boolean equals(Object obj) {
         if (this == obj) {
@@ -61,6 +107,11 @@ public class Country implements GenericEntity {
         return Objects.equals(this.id, other.id);
     }
 
+    /**
+     * Vraca String reprezentaciju drzave na osnovu atributa name.
+     * 
+     * @return country - String reprezentacija drzave u odgovarajucem formatu.
+     */
     @Override
     public String toString() {
         return name;
