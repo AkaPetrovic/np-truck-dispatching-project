@@ -16,18 +16,46 @@ import rs.ac.bg.fon.ai.np.NPCommon.domain.TruckType;
 import rs.ac.bg.fon.ai.np.NPCommon.domain.User;
 import rs.ac.bg.fon.ai.np.NPServer.controller.Controller;
 
+/**
+ * Predstavlja nit koja obradjuje zahteve koji pristizu od strane klijenta.
+ * 
+ * Sadrzi podatak o soketu i ulaznom toku podataka koji sluzi za prijem podataka od suprotne strane.
+ * 
+ * @author Aleksa Petrovic
+ * @since 1.1.0
+ *
+ */
 public class ProcessClientsRequests extends Thread {
-
+	/**
+	 * Soket preko koga ce se odvijati komunikacija izmedju servera i klijenta.
+	 */
     Socket socket;
+    /**
+     * Posiljalac odgovora.
+     */
     Sender sender;
+    /**
+     * Primalac zahteva.
+     */
     Receiver receiver;
 
+    /**
+     * Konstruktor koji na osnovu podatka o soketu postavlja inicijalne vrednosti atribute klase ProcessClientsRequests.
+     * @param socket - Inicijalna vrednost soketa koja se cuva kada se uspostavi konekcija izmedju klijenta i servera.
+     */
     public ProcessClientsRequests(Socket socket) {
         this.socket = socket;        
         sender = new Sender(socket);
         receiver = new Receiver(socket);
     }
 
+    /**
+     * Oznacava sta ce nit da radi. U ovom slucaju to je prihvatanje zahteva i na osnovu toga koja je operacija sadrzana u zahtevu (koju operaciju treba izvrsiti) poziva odredjenu metodu iz Controller klase koja predstavlja kontroler na strani servera.
+     * 
+     * Na kraju, bez obzira da li je nastala greska prilikom izvrsavanja operacije ili ne, posiljalac salje odgovor (server salje odgovor klijentu).
+     * 
+     * Ova metoda se izvrsava sve dok nit ne bude prekinuta preko interrupt() metode.
+     */
     @Override
     public void run() {
         while (!isInterrupted()) {
@@ -102,8 +130,16 @@ public class ProcessClientsRequests extends Thread {
         }
     }
     
+    /**
+     * Sluzi da zatvori tok za prihvatanje zahteva. Ova metoda dalje poziva close() metodu klase Receiver koja zapravo zatvara ulazni tok podataka na strani primaoca.
+     * @throws IOException - U slucaju da dodje do greske prilikom zatvaranja ulaznog toka podataka.
+     */
     public void close() throws IOException{
-        receiver.close();
+        try {
+			receiver.close();
+		} catch (IOException e) {
+			e.printStackTrace();
+			throw e;
+		}
     }
-
 }

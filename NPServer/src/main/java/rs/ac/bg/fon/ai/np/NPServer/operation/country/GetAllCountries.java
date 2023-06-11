@@ -5,8 +5,19 @@ import java.util.List;
 import rs.ac.bg.fon.ai.np.NPCommon.domain.Country;
 import rs.ac.bg.fon.ai.np.NPServer.operation.AbstractGenericOperation;
 
+/**
+ * Predstavlja specificnu operaciju koja ima za cilj da sve drzave, iz kojih dolaze proizvodjaci kamiona, iz baze podataka postavi u listu.
+ * 
+ * Sadrzi listu drzava.
+ * 
+ * @author Aleksa Petrovic
+ * @since 1.1.0
+ *
+ */
 public class GetAllCountries extends AbstractGenericOperation{
-
+	/**
+	 * Lista drzava.
+	 */
     List<Country> countries;
     
     @Override
@@ -18,6 +29,10 @@ public class GetAllCountries extends AbstractGenericOperation{
         countries = repository.getAll((Country) param);
     }
     
+    /**
+     * Vraca listu drzava.
+     * @return countries - Lista drzava iz kojih dolaze proizvodjaci kamiona.
+     */
     public List<Country> getCountries() {
         return countries;
     }
