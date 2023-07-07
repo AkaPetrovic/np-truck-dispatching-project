@@ -9,15 +9,32 @@ import rs.ac.bg.fon.ai.np.NPClient.communication.Communication;
 import rs.ac.bg.fon.ai.np.NPCommon.domain.Driver;
 import rs.ac.bg.fon.ai.np.NPCommon.domain.Truck;
 
+/**
+ * Predstavlja formu koja je namenjena za brisanje odredjenog kamiona iz baze podataka.
+ * 
+ * @author Aleksa Petrovic
+ * @since 1.1.0
+ *
+ */
 public class FrmDeleteDriver extends javax.swing.JDialog {
 
+	/**
+	 * Konstruktor koji sluzi za kreiranje komponenti forme, njihovo inicijalno pozicioniranje i postavljanje njihovog ponasanja, kao i upisivanje pocetnih vrednosti.
+	 * 
+	 * @param parent - JFrame prozor iz kog je pozvan ovaj JDialog prozor.
+	 * @param modal - Boolean vrednost koja odredjuje da li je JDialog prozor modalan.
+	 * @throws Exception - Ukoliko dodje do greske prilikom pripreme izgleda forme i podataka na njoj.
+	 */
     public FrmDeleteDriver(java.awt.Frame parent, boolean modal) throws Exception {
         super(parent, modal);
         initComponents();
         setLocationRelativeTo(parent);
         prepareView();
     }
-                        
+    
+    /**
+     * Kreira komponente koje ce biti postavljene na formu i vrsi njihovo inicijalno podesavanje.
+     */
     private void initComponents() {
 
         txtNameSearch = new javax.swing.JTextField();
@@ -187,6 +204,10 @@ public class FrmDeleteDriver extends javax.swing.JDialog {
         pack();
     }                        
 
+    /**
+     * Trazi vozace prema imenu upisanom u polje za pretragu.
+     * @param evt - Predstavlja dogadjaj koji se desio nad dugmetom (klik).
+     */
     private void btnLoadDriversActionPerformed(java.awt.event.ActionEvent evt) {                                               
         try {
             Driver driver = new Driver();
@@ -208,6 +229,10 @@ public class FrmDeleteDriver extends javax.swing.JDialog {
         }
     }                                              
 
+    /**
+     * Ucitava podatke o vozacu u odgovarajuca polja na formi.
+     * @param evt - Predstavlja dogadjaj koji se desio nad dugmetom (klik).
+     */
     private void btnChooseActionPerformed(java.awt.event.ActionEvent evt) {                                          
         try {
             Driver selectedDriver = (Driver)cbDrivers.getSelectedItem();
@@ -231,6 +256,10 @@ public class FrmDeleteDriver extends javax.swing.JDialog {
         }
     }                                         
 
+    /**
+     * Pokrece proces brisanja vozaca iz baze podataka sa odgovarajucom ID vrednoscu.
+     * @param evt - Predstavlja dogadjaj koji se desio nad dugmetom (klik).
+     */
     private void btnDeleteActionPerformed(java.awt.event.ActionEvent evt) {                                          
         try{
             Driver driver = new Driver();
@@ -243,25 +272,80 @@ public class FrmDeleteDriver extends javax.swing.JDialog {
             JOptionPane.showMessageDialog(this, ex.getMessage());
         }
     }                                         
-                    
+    
+    /**
+     * Dugme za upisivanje podataka o izabranom vozacu u polja na formi.
+     */
     private javax.swing.JButton btnChoose;
+    /**
+     * Dugme za brisanje datog vozaca iz baze podataka.
+     */
     private javax.swing.JButton btnDelete;
+    /**
+     * Dugme za pretragu vozaca prema imenu unesenom u odgovarajuce polje za pretragu.
+     */
     private javax.swing.JButton btnLoadDrivers;
+    /**
+     * Padajuci meni sa vozacima koji se nalaze u bazi i cije se ime poklapa sa imenom unesenim u polje za pretragu.
+     */
     private javax.swing.JComboBox<Driver> cbDrivers;
+    /**
+     * Padajuci meni sa listom kamiona, gde je selektovani kamion upravo onaj koji se vezuje za datog vozaca. Onemoguceno na formi za brisanje.
+     */
     private javax.swing.JComboBox<Truck> cbTrucks;
+    /**
+     * Panel koji obuhvata komponente za rad sa podacima vezanim za vozaca.
+     */
     private javax.swing.JPanel jpnlDriverData;
+    /**
+     * Labela koja se odnosi na polje za unos datuma rodjenja vozaca.
+     */
     private javax.swing.JLabel lblBirthday;
+    /**
+     * Labela koja se odnosi na polje za unos imena vozaca za potrebe pretrage.
+     */
     private javax.swing.JLabel lblEnterDriversName;
+    /**
+     * Labela koja se odnosi na polje za unos ID vrednosti vozaca.
+     */
     private javax.swing.JLabel lblId;
+    /**
+     * Labela koja se odnosi na polje za unos imena vozaca.
+     */
     private javax.swing.JLabel lblName;
+    /**
+     * Labela koja se odnosi na polje za unos prezimena vozaca.
+     */
     private javax.swing.JLabel lblSurname;
+    /**
+     * Labela koja se odnosi na padajuci meni za izbor kamiona koji ce se vezivati za vozaca.
+     */
     private javax.swing.JLabel lblTruck;
+    /**
+     * Polje za unos datuma rodjena vozaca. Onemoguceno na formi za brisanje.
+     */
     private javax.swing.JTextField txtBirthday;
+    /**
+     * Polje za unos ID vrednosti vozaca. Onemoguceno na formi za brisanje.
+     */
     private javax.swing.JTextField txtId;
+    /**
+     * Polje za unos imena vozaca. Onemoguceno na formi za brisanje.
+     */
     private javax.swing.JTextField txtName;
+    /**
+     * Polje za unos imena vozaca za potrebe pretrage.
+     */
     private javax.swing.JTextField txtNameSearch;
+    /**
+     * Polje za unos prezimena vozaca. Onemoguceno na formi za brisanje.
+     */
     private javax.swing.JTextField txtSurname;                  
 
+    /**
+     * Preuzima listu kamiona iz baze podataka i postavlja elemente te liste u okviru padajuceg menija sa kamionima koji mogu biti vezani za vozaca.
+     * @throws Exception - Ukoliko dodje do greske prilikom preuzimanja liste kamiona iz baze podataka.
+     */
     private void prepareView() throws Exception {
         List<Truck> trucks = Communication.getInstance().getAllTrucks(new Truck());
         

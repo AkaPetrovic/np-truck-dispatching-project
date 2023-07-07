@@ -11,21 +11,38 @@ import rs.ac.bg.fon.ai.np.NPClient.communication.Communication;
 import rs.ac.bg.fon.ai.np.NPCommon.domain.Truck;
 import rs.ac.bg.fon.ai.np.NPCommon.domain.TruckMaintenance;
 
+/**
+ * Predstavlja formu koja je namenjena za pronalazenje servisa kamiona iz baze podataka koji odgovaraju odredjenom kriterijumu.
+ * 
+ * @author Aleksa Petrovic
+ * @since 1.1.0
+ *
+ */
 public class FrmFindTruckMaintenances extends javax.swing.JDialog {
 
+	/**
+	 * Konstruktor koji sluzi za kreiranje komponenti forme, njihovo inicijalno pozicioniranje i postavljanje njihovog ponasanja, kao i upisivanje pocetnih vrednosti.
+	 * 
+	 * @param parent - JFrame prozor iz kog je pozvan ovaj JDialog prozor.
+	 * @param modal - Boolean vrednost koja odredjuje da li je JDialog prozor modalan.
+	 * @throws Exception - Ukoliko dodje do greske prilikom pripreme izgleda forme i podataka na njoj.
+	 */
     public FrmFindTruckMaintenances(java.awt.Frame parent, boolean modal) throws Exception {
         super(parent, modal);
         initComponents();
         setLocationRelativeTo(parent);
         prepareView();
     }
-                        
+    
+    /**
+     * Kreira komponente koje ce biti postavljene na formu i vrsi njihovo inicijalno podesavanje.
+     */
     private void initComponents() {
 
         btnSearchMaintenances = new javax.swing.JButton();
         txtSearchDate = new javax.swing.JTextField();
         lblEnterDate = new javax.swing.JLabel();
-        pnlLoadData = new javax.swing.JPanel();
+        pnlTruckServiceData = new javax.swing.JPanel();
         lblDateOfService = new javax.swing.JLabel();
         txtDateOfService = new javax.swing.JTextField();
         lblKmAtService = new javax.swing.JLabel();
@@ -49,8 +66,8 @@ public class FrmFindTruckMaintenances extends javax.swing.JDialog {
 
         lblEnterDate.setText("Enter the start date:");
 
-        pnlLoadData.setBorder(javax.swing.BorderFactory.createTitledBorder("Truck maintenance data"));
-        pnlLoadData.setName(""); // NOI18N
+        pnlTruckServiceData.setBorder(javax.swing.BorderFactory.createTitledBorder("Truck maintenance data"));
+        pnlTruckServiceData.setName(""); // NOI18N
 
         lblDateOfService.setText("Date of service:");
 
@@ -68,8 +85,8 @@ public class FrmFindTruckMaintenances extends javax.swing.JDialog {
 
         cbTrucks.setEnabled(false);
 
-        javax.swing.GroupLayout pnlLoadDataLayout = new javax.swing.GroupLayout(pnlLoadData);
-        pnlLoadData.setLayout(pnlLoadDataLayout);
+        javax.swing.GroupLayout pnlLoadDataLayout = new javax.swing.GroupLayout(pnlTruckServiceData);
+        pnlTruckServiceData.setLayout(pnlLoadDataLayout);
         pnlLoadDataLayout.setHorizontalGroup(
             pnlLoadDataLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnlLoadDataLayout.createSequentialGroup()
@@ -134,7 +151,7 @@ public class FrmFindTruckMaintenances extends javax.swing.JDialog {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(pnlLoadData, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(pnlTruckServiceData, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(cbTruckMaintenances, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -161,13 +178,17 @@ public class FrmFindTruckMaintenances extends javax.swing.JDialog {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnChoose)
                 .addGap(18, 18, 18)
-                .addComponent(pnlLoadData, javax.swing.GroupLayout.PREFERRED_SIZE, 182, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(pnlTruckServiceData, javax.swing.GroupLayout.PREFERRED_SIZE, 182, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
     }                       
 
+    /**
+     * Pretrazuje servise na osnovu datuma unesenog u polje za pretragu.
+     * @param evt - Predstavlja dogadjaj koji se desio nad dugmetom (klik).
+     */
     private void btnSearchMaintenancesActionPerformed(java.awt.event.ActionEvent evt) {                                                      
         try {
             try {
@@ -195,6 +216,10 @@ public class FrmFindTruckMaintenances extends javax.swing.JDialog {
         }
     }                                                     
 
+    /**
+     * Ucitava podatke o servisu u odgovarajuca polja na formi.
+     * @param evt - Predstavlja dogadjaj koji se desio nad dugmetom (klik).
+     */
     private void btnChooseActionPerformed(java.awt.event.ActionEvent evt) {                                          
         try {
             TruckMaintenance truckMaintenance = (TruckMaintenance)cbTruckMaintenances.getSelectedItem();
@@ -215,22 +240,68 @@ public class FrmFindTruckMaintenances extends javax.swing.JDialog {
             JOptionPane.showMessageDialog(this, e.getMessage());
         }
     }                                         
-               
+    
+    /**
+     * Dugme za upisivanje podataka o izabranom servisu u odgovarajuca polja na formi.
+     */
     private javax.swing.JButton btnChoose;
+    /**
+     * Dugme za pretragu servisa prema datumu unesenom u polju za pretragu.
+     */
     private javax.swing.JButton btnSearchMaintenances;
+    /**
+     * Padajuci meni sa listom pronadjenih servisa u bazi podataka prema datumu za pretragu.
+     */
     private javax.swing.JComboBox<TruckMaintenance> cbTruckMaintenances;
+    /**
+     * Padajuci meni sa listom svih kamiona gde je selektovani kamion onaj za koji je servis odradjen.
+     */
     private javax.swing.JComboBox<Truck> cbTrucks;
+    /**
+     * Labela koja se odnosi na polje za unos datuma servisa.
+     */
     private javax.swing.JLabel lblDateOfService;
+    /**
+     * Labela koja se odnosi na polje za unos datuma za potrebe procesa pretrage.
+     */
     private javax.swing.JLabel lblEnterDate;
+    /**
+     * Labela koja se odnosi na polje za unos kilometraze prilikom servisa.
+     */
     private javax.swing.JLabel lblKmAtService;
+    /**
+     * Labela koja se odnosi na padajuci meni sa listom kamiona.
+     */
     private javax.swing.JLabel lblTruck;
+    /**
+     * Labela koja se odnosi na polje za unos ID vrednosti servisa.
+     */
     private javax.swing.JLabel lblTruckMaintenanceId;
-    private javax.swing.JPanel pnlLoadData;
+    /**
+     * Panel sa grafickim komponentama za rad sa servisima kamiona.
+     */
+    private javax.swing.JPanel pnlTruckServiceData;
+    /**
+     * Tekstualno polje za unos datuma servisa.
+     */
     private javax.swing.JTextField txtDateOfService;
+    /**
+     * Tekstualno polje za unos kilometraze u trenutku servisa.
+     */
     private javax.swing.JTextField txtKmAtService;
+    /**
+     * Tekstualno polje za unos datuma za proces pretrage.
+     */
     private javax.swing.JTextField txtSearchDate;
+    /**
+     * Tekstualno polje za unos ID vrednosti servisa.
+     */
     private javax.swing.JTextField txtTruckMaintenanceId;
     
+    /**
+     * Preuzima listu kamiona i elemente te liste ubacuje u padajuci meni sa kamionima.
+     * @throws Exception - Ukoliko dodje do greske prilikom preuzimanja liste kamiona iz baze podataka.
+     */
     private void prepareView() throws Exception {
         List<Truck> trucks = Communication.getInstance().getAllTrucks(new Truck());
         

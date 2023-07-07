@@ -11,8 +11,23 @@ import rs.ac.bg.fon.ai.np.NPClient.communication.Communication;
 import rs.ac.bg.fon.ai.np.NPCommon.domain.Driver;
 import rs.ac.bg.fon.ai.np.NPCommon.domain.Truck;
 
+
+/**
+ * Predstavlja formu koja je namenjena za vrsenje izmena nad odredjenim vozacem iz baze podataka.
+ * 
+ * @author Aleksa Petrovic
+ * @since 1.1.0
+ *
+ */
 public class FrmEditDriver extends javax.swing.JDialog {
 
+	/**
+	 * Konstruktor koji sluzi za kreiranje komponenti forme, njihovo inicijalno pozicioniranje i postavljanje njihovog ponasanja, kao i upisivanje pocetnih vrednosti.
+	 * 
+	 * @param parent - JFrame prozor iz kog je pozvan ovaj JDialog prozor.
+	 * @param modal - Boolean vrednost koja odredjuje da li je JDialog prozor modalan.
+	 * @throws Exception - Ukoliko dodje do greske prilikom pripreme izgleda forme i podataka na njoj.
+	 */
     public FrmEditDriver(java.awt.Frame parent, boolean modal) throws Exception {
         super(parent, modal);
         initComponents();
@@ -20,6 +35,9 @@ public class FrmEditDriver extends javax.swing.JDialog {
         prepareView();
     }
     
+    /**
+     * Kreira komponente koje ce biti postavljene na formu i vrsi njihovo inicijalno podesavanje.
+     */
     private void initComponents() {
 
         txtNameSearch = new javax.swing.JTextField();
@@ -189,6 +207,10 @@ public class FrmEditDriver extends javax.swing.JDialog {
         pack();
     }                       
 
+    /**
+     * Cuva promene napravljene nad vozacem u bazi podataka.
+     * @param evt - Predstavlja dogadjaj koji se desio nad dugmetom (klik).
+     */
     private void btnSaveChangesActionPerformed(java.awt.event.ActionEvent evt) {                                               
         try{
             if(validateForm()){
@@ -215,6 +237,10 @@ public class FrmEditDriver extends javax.swing.JDialog {
         }
     }                                              
 
+    /**
+     * Pretrazuje vozace cije ime odgovara imenu unesenom u polje za pretragu.
+     * @param evt - Predstavlja dogadjaj koji se desio nad dugmetom (klik).
+     */
     private void btnLoadDriversActionPerformed(java.awt.event.ActionEvent evt) {                                               
         try {
             Driver driver = new Driver();
@@ -235,6 +261,10 @@ public class FrmEditDriver extends javax.swing.JDialog {
         }
     }                                              
 
+    /**
+     * Ucitava podatke o vozacu u odgovarajuca polja na formi.
+     * @param evt - Predstavlja dogadjaj koji se desio nad dugmetom (klik).
+     */
     private void btnChooseActionPerformed(java.awt.event.ActionEvent evt) {                                          
         try {
             Driver selectedDriver = (Driver)cbDrivers.getSelectedItem();
@@ -261,25 +291,80 @@ public class FrmEditDriver extends javax.swing.JDialog {
             JOptionPane.showMessageDialog(this, e.getMessage()); 
         }
     }                                         
-                  
+    
+    /**
+     * Dugme za upisivanje podataka o izabranom vozacu u odgovarajuca polja na formi.
+     */
     private javax.swing.JButton btnChoose;
+    /**
+     * Dugme za pretragu vozaca prema imenu koje treba da odgovara imenu unesenom u polje za pretragu.
+     */
     private javax.swing.JButton btnLoadDrivers;
+    /**
+     * Dugme za cuvanje promena napravljenih nad vozacem.
+     */
     private javax.swing.JButton btnSaveChanges;
+    /**
+     * Padajuci meni vozaca koji se mogu odabrati kako bi se njihove vrednosti dalje menjale.
+     */
     private javax.swing.JComboBox<Driver> cbDrivers;
+    /**
+     * Padajuci meni kamiona koji se mogu dodeliti vozacu.
+     */
     private javax.swing.JComboBox<Truck> cbTrucks;
+    /**
+     * Panel koji obuhvata komponente za rad sa vozacima.
+     */
     private javax.swing.JPanel jpnlDriverData;
+    /**
+     * Labela koja se odnosi na polje za unos datuma rodjenja.
+     */
     private javax.swing.JLabel lblBirthday;
+    /**
+     * Labela koja se odnosi na unos imena po kojem ce se vrsiti pretraga vozaca u bazi podataka.
+     */
     private javax.swing.JLabel lblEnterDriversName;
+    /**
+     * Labela koja se odnosi na polje za ID koji vozac ima u bazi podataka.
+     */
     private javax.swing.JLabel lblId;
+    /**
+     * Labela koja se odnosi na polje za unos imena vozaca.
+     */
     private javax.swing.JLabel lblName;
+    /**
+     * Labela koja se odnosi na polje za unos prezimena vozaca.
+     */
     private javax.swing.JLabel lblSurname;
+    /**
+     * Labela koja se odnosi na padajuci meni sa kamionima koji se mogu dodeliti vozacu.
+     */
     private javax.swing.JLabel lblTruck;
+    /**
+     * Tekstualno polje za unos datuma rodjenja vozaca.
+     */
     private javax.swing.JTextField txtBirthday;
+    /**
+     * Tekstualno polje za unos ID vrednosti vozaca u bazi podataka. Onemogucen je unos novih vrednosti vec sluzi samo za prikaz.
+     */
     private javax.swing.JTextField txtId;
+    /**
+     * Tekstualno polje za unos imena vozaca.
+     */
     private javax.swing.JTextField txtName;
+    /**
+     * Tekstualno polje za unos imena prema kojem ce se vrsiti pretraga vozaca.
+     */
     private javax.swing.JTextField txtNameSearch;
+    /**
+     * Tekstualno polje za unos prezimena vozaca.
+     */
     private javax.swing.JTextField txtSurname;                  
 
+    /**
+     * Preuzima listu kamiona iz baze podataka i elemente te liste ubacuje u padajuci meni sa kamionima.
+     * @throws Exception - Ukoliko dodje do greske prilikom preuzimanja liste kamiona iz baze podataka.
+     */
     private void prepareView() throws Exception {
         List<Truck> trucks = Communication.getInstance().getAllTrucks(new Truck());
         
@@ -288,6 +373,10 @@ public class FrmEditDriver extends javax.swing.JDialog {
         }
     }
 
+    /**
+     * Proverava da li su polja na formi ispravno popunjena. Ova metoda proverava da li su polja prazna.
+     * @return true - Ukoliko su polja ispravno popunjena / false - Ukoliko su polja neispravno popunjena.
+     */
     private boolean validateForm() {
         if(txtName.getText().isEmpty() || txtSurname.getText().isEmpty() || txtBirthday.getText().isEmpty()){
             JOptionPane.showMessageDialog(this, "You must fill out all the fields on the form");

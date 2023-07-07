@@ -17,8 +17,22 @@ import rs.ac.bg.fon.ai.np.NPCommon.domain.Driver;
 import rs.ac.bg.fon.ai.np.NPCommon.domain.LoadItem;
 import rs.ac.bg.fon.ai.np.NPCommon.domain.TruckLoad;
 
+/**
+ * Predstavlja formu koja je namenjena za dodavanje novog tovara u bazu podataka.
+ * 
+ * @author Aleksa Petrovic
+ * @since 1.1.0
+ *
+ */
 public class FrmAddLoad extends javax.swing.JDialog {
 
+	/**
+	 * Konstruktor koji sluzi za kreiranje komponenti forme, njihovo inicijalno pozicioniranje i postavljanje njihovog ponasanja, kao i upisivanje pocetnih vrednosti.
+	 * 
+	 * @param parent - JFrame prozor iz kog je pozvan ovaj JDialog prozor.
+	 * @param modal - Boolean vrednost koja odredjuje da li je JDialog prozor modalan.
+	 * @throws Exception - Ukoliko dodje do greske prilikom pripreme izgleda forme i podataka na njoj.
+	 */
     public FrmAddLoad(java.awt.Frame parent, boolean modal) throws Exception {
         super(parent, modal);
         initComponents();
@@ -26,8 +40,10 @@ public class FrmAddLoad extends javax.swing.JDialog {
         prepareView();
     }
     
+    /**
+     * Kreira komponente koje ce biti postavljene na formu i vrsi njihovo inicijalno podesavanje.
+     */
     private void initComponents() {
-
         lblDepartureDate = new javax.swing.JLabel();
         txtDepartureDate = new javax.swing.JTextField();
         lblArrivalDate = new javax.swing.JLabel();
@@ -257,6 +273,10 @@ public class FrmAddLoad extends javax.swing.JDialog {
         pack();
     }                      
 
+    /**
+     * Brise red iz tabele koja sadrzi stavke tovara, a samim tim i izbacuje stavku tovara iz liste stavki koje se vezuju za taj tovar.
+     * @param evt - Predstavlja dogadjaj koji se desio nad dugmetom (klik).
+     */
     private void btnRemoveItemActionPerformed(java.awt.event.ActionEvent evt) {                                              
         int selectedRow = tableLoadItems.getSelectedRow();
         LoadTableModel model = (LoadTableModel)tableLoadItems.getModel();
@@ -268,6 +288,10 @@ public class FrmAddLoad extends javax.swing.JDialog {
         }
     }                                             
 
+    /**
+     * Dodaje novi red u tabelu koja sadrzi stavke tovara, a samim tim i dodaje stavku tovara u listu stavki koje se vezuju za taj tovar.
+     * @param evt - Predstavlja dogadjaj koji se desio nad dugmetom (klik).
+     */
     private void btnAddItemActionPerformed(java.awt.event.ActionEvent evt) {                                           
         try {
             validateLoadItemForm();
@@ -287,6 +311,10 @@ public class FrmAddLoad extends javax.swing.JDialog {
         }
     }                                          
 
+    /**
+     * Preuzima podatke unete na formi, proverava da li su uneti na ispravan nacin i na kraju pokrece proces dodavanja novog tovara u bazu podataka.
+     * @param evt - Predstavlja dogadjaj koji se desio nad dugmetom (klik).
+     */
     private void btnSaveActionPerformed(java.awt.event.ActionEvent evt) {                                        
         try {
             validateLoadForm();
@@ -362,37 +390,128 @@ public class FrmAddLoad extends javax.swing.JDialog {
             JOptionPane.showMessageDialog(this, e.getMessage());
         }
     }                                       
-            
+    
+    /**
+     * Dugme za dodavanje nove stavke tovara u listu stavki, kao i dodavanje novog reda u tabeli.
+     */
     private javax.swing.JButton btnAddItem;
+    /**
+     * Dugme za brisanje stavke tovara iz liste stavki, kao i brisanje odredjenog reda iz tabele stavki tovara.
+     */
     private javax.swing.JButton btnRemoveItem;
+    /**
+     * Dugme za dodavanje novog tovara u bazu podataka.
+     */
     private javax.swing.JButton btnSave;
+    /**
+     * Padajuci meni sa listom vozaca koji se mogu angazovati za prevoz novog tovara.
+     */
     private javax.swing.JComboBox<Driver> cbDrivers;
+    /**
+     * Polje koje predstavlja da li je stavka tovara opasna.
+     */
     private javax.swing.JCheckBox checkDangerous;
+    /**
+     * Polje koje predstavlja da li je stavka tovara lomljiva.
+     */
     private javax.swing.JCheckBox checkFragile;
+    /**
+     * Labela koja se odnosi na polje za unos datuma dolaska.
+     */
     private javax.swing.JLabel lblArrivalDate;
+    /**
+     * Labela koja se odnosi na polje za unos vremena dolaska.
+     */
     private javax.swing.JLabel lblArrivalTime;
+    /**
+     * Labela koja se odnosi na polje za oznacavanje stavke kao opasne.
+     */
     private javax.swing.JLabel lblDangerous;
+    /**
+     * Labela koja se odnosi na polje za unos datuma polaska.
+     */
     private javax.swing.JLabel lblDepartureDate;
+    /**
+     * Labela koja se odnosi na polje za unos vremena polaska.
+     */
     private javax.swing.JLabel lblDepartureTime;
+    /**
+     * Labela koja se odnosi na padajuci meni za izbor vozaca koji ce biti angazovan za prevoz novog tovara.
+     */
     private javax.swing.JLabel lblDriver;
+    /**
+     * Labela koja se odnosi na polje za oznacavanje stavke kao lomljive.
+     */
     private javax.swing.JLabel lblFragile;
+    /**
+     * Labela koja se odnosi na polje za unos prihoda koji se ostvaruje po predjenom kilometru.
+     */
     private javax.swing.JLabel lblIncomePerKilometer;
+    /**
+     * Labela koja se odnosi na polje za unos imena stavke tovara.
+     */
     private javax.swing.JLabel lblItemName;
+    /**
+     * Labela koja se odnosi na tabelu sa trenutnim stavkama tovara koje se vezuju za njega.
+     */
     private javax.swing.JLabel lblLoadItems;
+    /**
+     * Labela koja se odnosi na polje za unos zapremine stavke tovara.
+     */
     private javax.swing.JLabel lblVolume;
+    /**
+     * Labela koja se odnosi na polje za unos mase stavke tovara.
+     */
     private javax.swing.JLabel lblWeight;
+    /**
+     * Panel koji obuhvata komponente na formi koje se odnose na pojedinacne stavke tovara.
+     */
     private javax.swing.JPanel pnlNewLoadItem;
+    /**
+     * Scroll pane koji predstavlja neophodnu komponentu za ispravno funkcionisanje tabele.
+     */
     private javax.swing.JScrollPane spaneLoadItems;
+    /**
+     * Tabela za prikaz trenutnog stanja liste stavki tovara.
+     */
     private javax.swing.JTable tableLoadItems;
+    /**
+     * Polje za unos datuma dolaska.
+     */
     private javax.swing.JTextField txtArrivalDate;
+    /**
+     * Polje za unos vremena dolaska.
+     */
     private javax.swing.JTextField txtArrivalTime;
+    /**
+     * Polje za unos datuma polaska.
+     */
     private javax.swing.JTextField txtDepartureDate;
+    /**
+     * Polje za unos vremena polaska.
+     */
     private javax.swing.JTextField txtDepartureTime;
+    /**
+     * Polje za unos prihoda po predjenom kilometru.
+     */
     private javax.swing.JTextField txtIncomePerKilometer;
+    /**
+     * Polje za unos imena stavke tovara.
+     */
     private javax.swing.JTextField txtItemName;
+    /**
+     * Polje za unos zapremine stavke tovara.
+     */
     private javax.swing.JTextField txtVolume;
+    /**
+     * Polje za unos mase stavke tovara.
+     */
     private javax.swing.JTextField txtWeight;                
 
+    /**
+     * Kreira table model za rad sa tovarom, preuzima listu vozaca iz baze podataka i postavlja elemente te liste u padajuci meni koji sadrzi vozace koji su na raspolaganju za angazovanje za potrebe prevoza tovara.
+     * @throws Exception - Ukoliko dodje do greske prilikom preuzimanja liste vozaca iz baze podataka.
+     */
     private void prepareView() throws Exception {
         LoadTableModel model = new LoadTableModel(new TruckLoad());
         tableLoadItems.setModel(model);
@@ -404,6 +523,10 @@ public class FrmAddLoad extends javax.swing.JDialog {
         }
     }
 
+    /**
+     * Proverava ispravnost unetih podataka u odgovarajuca polja dela forme koji se odnosi na pojedinacne stavke.
+     * @throws Exception - Ukoliko neko polje nije popunjeno ili nije popunjeno na pravi nacin.
+     */
     private void validateLoadItemForm() throws Exception{
         if(txtItemName.getText().isEmpty() || txtVolume.getText().isEmpty() || txtWeight.getText().isEmpty()){
             throw new Exception("You must fill out all the fields on the form");
@@ -414,6 +537,10 @@ public class FrmAddLoad extends javax.swing.JDialog {
         }
     }
 
+    /**
+     * Proverava ispravnost unetih podataka u odgovarajuca polja dela forme koji se odnosi na sam novi tovar koji se kreira.
+     * @throws Exception - Ukoliko neko polje nije popunjeno ili nije popunjeno na pravi nacin.
+     */
     private void validateLoadForm() throws Exception{
         if(txtDepartureDate.getText().isEmpty() || txtArrivalDate.getText().isEmpty() || txtDepartureTime.getText().isEmpty() || txtArrivalTime.getText().isEmpty() || txtIncomePerKilometer.getText().isEmpty()){
             throw new Exception("You must fill out all the fields on the form");

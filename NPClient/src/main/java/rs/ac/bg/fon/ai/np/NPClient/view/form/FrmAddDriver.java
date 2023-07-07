@@ -9,15 +9,32 @@ import rs.ac.bg.fon.ai.np.NPClient.communication.Communication;
 import rs.ac.bg.fon.ai.np.NPCommon.domain.Driver;
 import rs.ac.bg.fon.ai.np.NPCommon.domain.Truck;
 
+/**
+ * Predstavlja formu koja je namenjena za dodavanje novog vozaca u bazu podataka.
+ * 
+ * @author Aleksa Petrovic
+ * @since 1.1.0
+ *
+ */
 public class FrmAddDriver extends javax.swing.JDialog {
 
+	/**
+	 * Konstruktor koji sluzi za kreiranje komponenti forme, njihovo inicijalno pozicioniranje i postavljanje njihovog ponasanja, kao i upisivanje pocetnih vrednosti.
+	 * 
+	 * @param parent - JFrame prozor iz kog je pozvan ovaj JDialog prozor.
+	 * @param modal - Boolean vrednost koja odredjuje da li je JDialog prozor modalan.
+	 * @throws Exception - Ukoliko dodje do greske prilikom pripreme izgleda forme i podataka na njoj.
+	 */
     public FrmAddDriver(java.awt.Frame parent, boolean modal) throws Exception {
         super(parent, modal);
         initComponents();
         setLocationRelativeTo(parent);
         prepareView();
     }
-                        
+    
+    /**
+     * Kreira komponente koje ce biti postavljene na formu i vrsi njihovo inicijalno podesavanje.
+     */
     private void initComponents() {
 
         lblName = new javax.swing.JLabel();
@@ -106,6 +123,10 @@ public class FrmAddDriver extends javax.swing.JDialog {
         pack();
     }                      
 
+    /**
+     * Preuzima tekst podatke unete u odgovarajuca polja prilikom popunjavanja forme, proverava da li su uneti na pravi nacin i pokrece proces dodavanja vozaca u bazu podataka.
+     * @param evt - Predstavlja dogadjaj koji se desio nad dugmetom (klik).
+     */
     private void btnSaveActionPerformed(java.awt.event.ActionEvent evt) {                                        
         try{
             if(validateForm()){
@@ -130,17 +151,48 @@ public class FrmAddDriver extends javax.swing.JDialog {
         }
     }                                       
 
-                       
+    
+    /**
+     * Dugme za dodavanje vozaca.
+     */
     private javax.swing.JButton btnSave;
+    /**
+     * Padajuci meni sa listom kamiona koji su na raspolaganju da se dodele vozacu.
+     */
     private javax.swing.JComboBox<Truck> cbTrucks;
+    /**
+     * Labela koja se odnosi na polje za datum rodjenja vozaca.
+     */
     private javax.swing.JLabel lblBirthday;
+    /**
+     * Labela koja se odnosi na polje za unos imena vozaca.
+     */
     private javax.swing.JLabel lblName;
+    /**
+     * Labela koja se odnosi na polje za unos prezimena vozaca.
+     */
     private javax.swing.JLabel lblSurname;
+    /**
+     * Labela koja se odnosi na padajuci meni sa listom kamiona koji se mogu dodeliti vozacu.
+     */
     private javax.swing.JLabel lblTruck;
+    /**
+     * Polje za unos datuma rodjenja vozaca.
+     */
     private javax.swing.JTextField txtBirthday;
+    /**
+     * Polje za unos imena vozaca.
+     */
     private javax.swing.JTextField txtName;
+    /**
+     * Polje za unos prezimena vozaca.
+     */
     private javax.swing.JTextField txtSurname;                
 
+    /**
+     * Pomocna metoda za validaciju polja forme. Proverava da li je neko od polja prazno.
+     * @return true - Ukoliko su sva polja popunjena, false u suprotnom.
+     */
     private boolean validateForm() {
         if(txtName.getText().isEmpty() || txtSurname.getText().isEmpty() || txtBirthday.getText().isEmpty()){
             JOptionPane.showMessageDialog(this, "You must fill out all the fields on the form");
@@ -150,6 +202,10 @@ public class FrmAddDriver extends javax.swing.JDialog {
         }
     }
 
+    /**
+     * Uzima listu kamiona iz baze podataka i postavlja elemente te liste kao moguce opcije prilikom izbora kamiona koji ce se dodeliti novom vozacu.
+     * @throws Exception - Ukoliko dodje do greske prilikom preuzimanja liste kamiona iz baze podataka.
+     */
     private void prepareView() throws Exception {
         List<Truck> trucks = Communication.getInstance().getAllTrucks(new Truck());
         for(Truck truck:trucks){

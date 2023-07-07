@@ -25,6 +25,7 @@ public class EditLoad extends AbstractGenericOperation{
             repository.edit(load);
 
             for(LoadItem item:load.getLoadItems()){
+            	System.out.println(item);
                 System.out.println(item.getState());
             }
             
