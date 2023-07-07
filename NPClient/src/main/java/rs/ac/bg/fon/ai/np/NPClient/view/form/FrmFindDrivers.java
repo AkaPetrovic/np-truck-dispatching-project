@@ -9,15 +9,32 @@ import rs.ac.bg.fon.ai.np.NPClient.communication.Communication;
 import rs.ac.bg.fon.ai.np.NPCommon.domain.Driver;
 import rs.ac.bg.fon.ai.np.NPCommon.domain.Truck;
 
+/**
+ * Predstavlja formu koja je namenjena za pronalazenje vozaca iz baze podataka koji odgovaraju odredjenom kriterijumu.
+ * 
+ * @author Aleksa Petrovic
+ * @since 1.1.0
+ *
+ */
 public class FrmFindDrivers extends javax.swing.JDialog {
 
+	/**
+	 * Konstruktor koji sluzi za kreiranje komponenti forme, njihovo inicijalno pozicioniranje i postavljanje njihovog ponasanja, kao i upisivanje pocetnih vrednosti.
+	 * 
+	 * @param parent - JFrame prozor iz kog je pozvan ovaj JDialog prozor.
+	 * @param modal - Boolean vrednost koja odredjuje da li je JDialog prozor modalan.
+	 * @throws Exception - Ukoliko dodje do greske prilikom pripreme izgleda forme i podataka na njoj.
+	 */
     public FrmFindDrivers(java.awt.Frame parent, boolean modal) throws Exception {
         super(parent, modal);
         initComponents();
         setLocationRelativeTo(parent);
         prepareView();
     }
-                         
+    
+    /**
+     * Kreira komponente koje ce biti postavljene na formu i vrsi njihovo inicijalno podesavanje.
+     */
     private void initComponents() {
 
         txtNameSearch = new javax.swing.JTextField();
@@ -173,6 +190,10 @@ public class FrmFindDrivers extends javax.swing.JDialog {
         pack();
     }                       
 
+    /**
+     * Pretrazuje vozace na osnovu imena unesenog u polje za pretragu.
+     * @param evt - Predstavlja dogadjaj koji se desio nad dugmetom (klik).
+     */
     private void btnLoadDriversActionPerformed(java.awt.event.ActionEvent evt) {                                               
         try {
             Driver driver = new Driver();
@@ -193,6 +214,10 @@ public class FrmFindDrivers extends javax.swing.JDialog {
         }
     }                                              
 
+    /**
+     * Ucitava podatke o vozacu u odgovarajuca polja na formi.
+     * @param evt - Predstavlja dogadjaj koji se desio nad dugmetom (klik).
+     */
     private void btnChooseActionPerformed(java.awt.event.ActionEvent evt) {                                          
         try {
             Driver selectedDriver = (Driver)cbDrivers.getSelectedItem();
@@ -214,24 +239,76 @@ public class FrmFindDrivers extends javax.swing.JDialog {
             JOptionPane.showMessageDialog(this, e.getMessage()); 
         }
     }                                         
-                    
+    
+    /**
+     * Dugme za upisivanje podataka o izabranom vozacu u odgovarajuca polja na formi.
+     */
     private javax.swing.JButton btnChoose;
+    /**
+     * Dugme za pretragu vozaca prema imenu unesenom u polju za pretragu.
+     */
     private javax.swing.JButton btnLoadDrivers;
+    /**
+     * Padajuci meni sa vozacima koji su pronadjeni na osnovu unesenog imena.
+     */
     private javax.swing.JComboBox<Driver> cbDrivers;
+    /**
+     * Padajuci meni kamiona koji se mogu dodeliti vozacu.
+     */
     private javax.swing.JComboBox<Truck> cbTrucks;
+    /**
+     * Panel koji sadrzi graficke komponente za rad sa vozacima.
+     */
     private javax.swing.JPanel jpnlDriverData;
+    /**
+     * Labela koja se odnosi na polje za unos datuma rodjenja vozaca.
+     */
     private javax.swing.JLabel lblBirthday;
+    /**
+     * Labela koja se odnosi na polje za unos imena koje predstavlja parametar za pretragu vozaca.
+     */
     private javax.swing.JLabel lblEnterDriversName;
+    /**
+     * Labela koja se odnosi na polje za ID vrednost vozaca.
+     */
     private javax.swing.JLabel lblId;
+    /**
+     * Labela koja se odnosi na polje za unos imena vozaca.
+     */
     private javax.swing.JLabel lblName;
+    /**
+     * Labela koja se odnosi na polje za unos prezimena vozaca.
+     */
     private javax.swing.JLabel lblSurname;
+    /**
+     * Labela koja se odnosi na padajuci meni sa kamionima koji se mogu dodeliti vozacu.
+     */
     private javax.swing.JLabel lblTruck;
+    /**
+     * Tekstualno polje za unos datuma rodjenja vozaca.
+     */
     private javax.swing.JTextField txtBirthday;
+    /**
+     * Tekstualno polje za unos ID vrednosti vozaca. Onemogucen je unos novih vrednosti, vec se moze koristiti samo za prikaz.
+     */
     private javax.swing.JTextField txtId;
+    /**
+     * Tekstualno polje za unos imena vozaca.
+     */
     private javax.swing.JTextField txtName;
+    /**
+     * Tekstualno polje za unos imena koje ce se koristiti za pretragu vozaca.
+     */
     private javax.swing.JTextField txtNameSearch;
+    /**
+     * Tekstualno polje za unos prezimena vozaca.
+     */
     private javax.swing.JTextField txtSurname;               
 
+    /**
+     * Preuzima listu kamiona i elemente te liste ubacuje u padajuci meni sa kamionima.
+     * @throws Exception - Ukoliko dodje do greske prilikom preuzimanja liste kamiona iz baze podataka.
+     */
     private void prepareView() throws Exception{
         try {
             List<Truck> trucks = Communication.getInstance().getAllTrucks(new Truck());

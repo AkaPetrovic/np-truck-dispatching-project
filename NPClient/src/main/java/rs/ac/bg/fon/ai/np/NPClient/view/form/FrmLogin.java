@@ -7,14 +7,27 @@ import javax.swing.event.DocumentListener;
 import rs.ac.bg.fon.ai.np.NPClient.communication.Communication;
 import rs.ac.bg.fon.ai.np.NPCommon.domain.User;
 
+/**
+ * Predstavlja formu za prijavu korisnika u okviru aplikacije.
+ * 
+ * @author Aleksa Petrovic
+ * @since 1.1.0
+ *
+ */
 public class FrmLogin extends javax.swing.JFrame {
 
+	/**
+	 * Konstruktor koji sluzi za kreiranje komponenti forme, njihovo inicijalno pozicioniranje i postavljanje njihovog ponasanja.
+	 */
     public FrmLogin() {
         initComponents();
         setLocationRelativeTo(null);
         prepareForm();
     }
-                          
+    
+    /**
+     * Kreira komponente koje ce biti postavljene na formu i vrsi njihovo inicijalno podesavanje.
+     */
     private void initComponents() {
 
         lblUsername = new javax.swing.JLabel();
@@ -88,11 +101,14 @@ public class FrmLogin extends javax.swing.JFrame {
         pack();
     }                       
 
+    /**
+     * Preuzima tekst unesen u username i password polja na formi i prijavljuje korisnika na aplikaciju.
+     * @param evt - Predstavlja dogadjaj koji se desio nad dugmetom (klik).
+     */
     private void btnLoginActionPerformed(java.awt.event.ActionEvent evt) {                                         
         try {
             String username = txtUsername.getText().trim();
             String password = String.copyValueOf(txtPassword.getPassword());
-            validateForm(username, password);
 
             User user = Communication.getInstance().login(username, password);
 
@@ -109,32 +125,39 @@ public class FrmLogin extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, ex.getMessage());
         }
     }                                        
-                   
+    
+    /**
+     * Dugme za logovanje korisnika.
+     */
     private javax.swing.JButton btnLogin;
+    /**
+     * Labela koja se odnosi na polje za lozinku korisnika.
+     */
     private javax.swing.JLabel lblPassword;
+    /**
+     * Labela za ispisivanje teksta ukoliko je polje za lozinku prazno.
+     */
     private javax.swing.JLabel lblPasswordError;
+    /**
+     * Labela koja se odnosi na polje za username korisnika.
+     */
     private javax.swing.JLabel lblUsername;
+    /**
+     * Labela za ispisivanje teksta ukoliko je polje za korisnicko ime prazno.
+     */
     private javax.swing.JLabel lblUsernameError;
+    /**
+     * Polje za unos lozinke prilikom prijave korisnika.
+     */
     private javax.swing.JPasswordField txtPassword;
+    /**
+     * Polje za unos korisnickog imena priikom prijave korisnika.
+     */
     private javax.swing.JTextField txtUsername;       
 
-    private void validateForm(String username, String password) throws Exception {
-        boolean errorOccured = false;
-        if (username.isEmpty()) {
-            errorOccured = true;
-            lblUsernameError.setText("Username cannot be empty!");
-        }
-        if (password.isEmpty()) {
-            if(!errorOccured){
-                errorOccured = true;
-            }
-            lblPasswordError.setText("Password cannot be empty!");
-        }
-        if (errorOccured) {
-            throw new Exception("You must fill username and password");
-        }
-    }
-
+    /**
+     * Postavljanje osluskivaca, koji ce pratiti da li je polja za username ili password korisnika prazno i ispisati odredjeni tekst ispod odgovarajuceg polja.
+     */
     private void prepareForm() {
         txtUsername.getDocument().addDocumentListener(new DocumentListener() {
             public void changedUpdate(DocumentEvent e) {

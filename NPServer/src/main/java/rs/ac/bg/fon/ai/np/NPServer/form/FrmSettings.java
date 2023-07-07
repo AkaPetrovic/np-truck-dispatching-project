@@ -1,39 +1,56 @@
 package rs.ac.bg.fon.ai.np.NPServer.form;
 
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
+import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
-import java.util.Properties;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.google.gson.JsonObject;
+
+/**
+ * Predstavlja graficki korisnicki interfejs za upravljanje podacima za pristup bazi podataka.
+ * 
+ * @author Aleksa Petrovic
+ * @since 1.1.0
+ *
+ */
 public class FrmSettings extends javax.swing.JDialog {
 
-    public FrmSettings(java.awt.Frame parent, boolean modal) {
+	/**
+	 * Konstruktor koji ima za cilj da izvrsi inicijalizaciju komponenti koje se nalaze na formi i pripremi podatke potrebne za rad sa formom.
+	 * @param parent - Forma koja predstavlja "roditelja" ove forme
+	 * @param modal - Boolean vrednost koja oznacava da li je ovaj prozor modalan ili nije (da li se moze istovremeno raditi sa drugim delovima program dok je ovaj prozor otvoren).
+	 * @throws IOException - U slucaju da dodje do greske prilikom prikupljanja podataka za pristup bazi iz fajla.
+	 */
+    public FrmSettings(java.awt.Frame parent, boolean modal) throws IOException {
         super(parent, modal);
         initComponents();
         setLocationRelativeTo(null);
         prepareView();
     }
-                         
+    
+    /**
+     * Kreira graficke komponente i postavlja i podesava njihov izgled, poziciju i ponasanje.
+     */
     private void initComponents() {
 
-        jLabel2 = new javax.swing.JLabel();
+        lblUrl = new javax.swing.JLabel();
         txtUrl = new javax.swing.JTextField();
         txtUser = new javax.swing.JTextField();
-        jLabel3 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
+        lblUsername = new javax.swing.JLabel();
+        lblPassword = new javax.swing.JLabel();
         btnSave = new javax.swing.JButton();
         txtPassword = new javax.swing.JPasswordField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Settings");
 
-        jLabel2.setText("URL:");
+        lblUrl.setText("URL:");
 
-        jLabel3.setText("Username:");
+        lblUsername.setText("Username:");
 
-        jLabel4.setText("Password:");
+        lblPassword.setText("Password:");
 
         btnSave.setText("Save");
         btnSave.addActionListener(new java.awt.event.ActionListener() {
@@ -51,9 +68,9 @@ public class FrmSettings extends javax.swing.JDialog {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel3)
-                            .addComponent(jLabel4)
-                            .addComponent(jLabel2))
+                            .addComponent(lblUsername)
+                            .addComponent(lblPassword)
+                            .addComponent(lblUrl))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(txtUrl)
@@ -69,15 +86,15 @@ public class FrmSettings extends javax.swing.JDialog {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel2)
+                    .addComponent(lblUrl)
                     .addComponent(txtUrl, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel3)
+                    .addComponent(lblUsername)
                     .addComponent(txtUser, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel4)
+                    .addComponent(lblPassword)
                     .addComponent(txtPassword, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnSave)
@@ -87,61 +104,84 @@ public class FrmSettings extends javax.swing.JDialog {
         pack();
     }                       
 
+    /**
+     * Prikuplja podatke vezane za URL, username i password za pristup bazi i cuva ih u dbconfig.json fajl.
+     * @param evt - Predstavlja dogadjaj koji se desio nad dugmetom (klik).
+     */
     private void btnSaveActionPerformed(java.awt.event.ActionEvent evt) {                                        
         String url = txtUrl.getText();
         String user = txtUser.getText();
         String password = String.copyValueOf(txtPassword.getPassword());
-//        url = jdbc:mysql://localhost:3306/projekat_ps
-//        username = root
-//        password = root
-        Properties props = new Properties();
         
-        try {
-            InputStream input = new FileInputStream("src/main/resources/dbconfig.properties");
-            props.load(input);
-        } catch (IOException ex) {
-            ex.printStackTrace();
-        }
-        
-        props.setProperty("url", url);
-        props.setProperty("username", user);
-        props.setProperty("password", password);
-        
-        try {
-            OutputStream output = new FileOutputStream("src/main/resources/dbconfig.properties");
-            props.store(output, null);
-        } catch (IOException ex) {
-            ex.printStackTrace();
-        }
+        JsonObject dbConfig = new JsonObject();
+
+	    dbConfig.addProperty("url", url);
+	    dbConfig.addProperty("username", user);
+	    dbConfig.addProperty("password", password);
+
+	    Gson gson = new GsonBuilder().setPrettyPrinting().create();
+
+	    String json = gson.toJson(dbConfig);
+
+	    try (FileWriter writer = new FileWriter("src/main/resources/dbconfig.json")) {
+	         writer.write(json);
+	    } catch (IOException ex) {
+	        ex.printStackTrace();
+	    }
         
         this.dispose();
     }                                       
-                    
+    
+    /**
+     * Dugme za cuvanje promena izvrsenih nad parametrima za pristup bazi podataka u dbconfig.json fajlu.
+     */
     private javax.swing.JButton btnSave;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
+    /**
+     * Labela neposredno pored polja za unos URL parametra za pristup bazi podataka.
+     */
+    private javax.swing.JLabel lblUrl;
+    /**
+     * Labela nepostredno pored polja za unos username parametra za pristup bazi podataka.
+     */
+    private javax.swing.JLabel lblUsername;
+    /**
+     * Labela neposredno pored polja za unos password parametra za pristup bazi podataka.
+     */
+    private javax.swing.JLabel lblPassword;
+    /**
+     * Polje za unos password parametra za pristup bazi podataka. Tekst koji se unosi je maskiran.
+     */
     private javax.swing.JPasswordField txtPassword;
+    /**
+     * Polje za unos URL parametra za pristup bazi podataka.
+     */
     private javax.swing.JTextField txtUrl;
+    /**
+     * Polje za unos username parametra za pristup bazi podataka.
+     */
     private javax.swing.JTextField txtUser;                 
 
-    private void prepareView() {
-        Properties props = new Properties();
-        
-        try {
-            InputStream input = new FileInputStream("src/main/resources/dbconfig.properties");
-            props.load(input);
-        } catch (IOException ex) {
-            ex.printStackTrace();
+    /**
+     * Pronalazi fajl dbconfig.json i cita podatke iz tog fajla i upisuje ih u odgovarajuca polja na formi.
+     * @throws IOException - U slucaju da dodje do greske prilikom prikupljanja podataka za pristup bazi iz fajla.
+     */
+    private void prepareView() throws IOException {
+    	try (FileReader fr = new FileReader("src/main/resources/dbconfig.json")) {
+        	Gson gson = new Gson();
+        	
+        	JsonObject jsonObject = gson.fromJson(fr, JsonObject.class);
+        	
+        	String url = jsonObject.get("url").getAsString();
+            String username = jsonObject.get("username").getAsString();
+            String password = jsonObject.get("password").getAsString();
+            
+            txtUrl.setText(url);
+            txtUser.setText(username);
+            txtPassword.setText(password);
+        } catch (IOException e) {
+            e.printStackTrace();
+            throw e;
         }
-        
-        String url = props.getProperty("url");
-        String username = props.getProperty("username");
-        String password = props.getProperty("password");
-        
-        txtUrl.setText(url);
-        txtUser.setText(username);
-        txtPassword.setText(password);
     }
 }
 

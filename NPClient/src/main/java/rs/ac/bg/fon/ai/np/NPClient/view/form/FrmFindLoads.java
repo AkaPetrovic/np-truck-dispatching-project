@@ -13,15 +13,32 @@ import rs.ac.bg.fon.ai.np.NPClient.view.form.component.table.LoadTableModel;
 import rs.ac.bg.fon.ai.np.NPCommon.domain.Driver;
 import rs.ac.bg.fon.ai.np.NPCommon.domain.TruckLoad;
 
+/**
+ * Predstavlja formu koja je namenjena za pronalazenje tovara iz baze podataka koji odgovaraju odredjenom kriterijumu.
+ * 
+ * @author Aleksa Petrovic
+ * @since 1.1.0
+ *
+ */
 public class FrmFindLoads extends javax.swing.JDialog {
 
+	/**
+	 * Konstruktor koji sluzi za kreiranje komponenti forme, njihovo inicijalno pozicioniranje i postavljanje njihovog ponasanja, kao i upisivanje pocetnih vrednosti.
+	 * 
+	 * @param parent - JFrame prozor iz kog je pozvan ovaj JDialog prozor.
+	 * @param modal - Boolean vrednost koja odredjuje da li je JDialog prozor modalan.
+	 * @throws Exception - Ukoliko dodje do greske prilikom pripreme izgleda forme i podataka na njoj.
+	 */
     public FrmFindLoads(java.awt.Frame parent, boolean modal) throws Exception {
         super(parent, modal);
         initComponents();
         setLocationRelativeTo(parent);
         prepareView();
     }
-                        
+    
+    /**
+     * Kreira komponente koje ce biti postavljene na formu i vrsi njihovo inicijalno podesavanje.
+     */
     private void initComponents() {
 
         txtSearchDate = new javax.swing.JTextField();
@@ -229,6 +246,10 @@ public class FrmFindLoads extends javax.swing.JDialog {
         pack();
     }                       
 
+    /**
+     * Pretrazuje tovare na osnovu datuma polaska unesenog u polje za pretragu.
+     * @param evt - Predstavlja dogadjaj koji se desio nad dugmetom (klik).
+     */
     private void btnSearchLoadsActionPerformed(java.awt.event.ActionEvent evt) {                                               
         try {
             try {
@@ -256,6 +277,10 @@ public class FrmFindLoads extends javax.swing.JDialog {
         }
     }                                              
 
+    /**
+     * Ucitava podatke o tovaru u odgovarajuca polja na formi.
+     * @param evt - Predstavlja dogadjaj koji se desio nad dugmetom (klik).
+     */
     private void btnChooseActionPerformed(java.awt.event.ActionEvent evt) {                                          
         try {
             TruckLoad load = (TruckLoad)cbLoads.getSelectedItem();
@@ -283,31 +308,104 @@ public class FrmFindLoads extends javax.swing.JDialog {
             JOptionPane.showMessageDialog(this, e.getMessage());
         }
     }                                         
-                  
+    
+    /**
+     * Dugme za upisivanje podataka o izabranom tovaru u odgovarajuca polja na formi.
+     */
     private javax.swing.JButton btnChoose;
+    /**
+     * Dugme za pretragu tovara prema datumu polaska unesenom u polje za pretragu.
+     */
     private javax.swing.JButton btnSearchLoads;
+    /**
+     * Padajuci meni sa vozacima u okviru koga je selektovani vozac angazovan za prevoz datog tovara.
+     */
     private javax.swing.JComboBox<Driver> cbDrivers;
+    /**
+     * Padajuci meni sa tovarima pronadjenim na osnovu parametara pretrage.
+     */
     private javax.swing.JComboBox<TruckLoad> cbLoads;
+    /**
+     * Labela koja se odnosi na polje za unos datuma dolaska.
+     */
     private javax.swing.JLabel lblArrivalDate;
+    /**
+     * Labela koja se odnosi na polje za unos vremena dolaska.
+     */
     private javax.swing.JLabel lblArrivalTime;
+    /**
+     * Labela koja se odnosi na polje za unos datuma polaska.
+     */
     private javax.swing.JLabel lblDepartureDate;
+    /**
+     * Labela koja se odnosi na polje za unos vremena polaska.
+     */
     private javax.swing.JLabel lblDepartureTime;
+    /**
+     * Labela koja se odnosi na padajuci meni sa vozacima.
+     */
     private javax.swing.JLabel lblDriver;
+    /**
+     * Labela koja se odnosi na polje za unos datuma na osnovu koga ce se vrsiti pretraga.
+     */
     private javax.swing.JLabel lblEnterStartDate;
+    /**
+     * Labela koja se odnosi na polje za unos prihoda po predjenom kilometru.
+     */
     private javax.swing.JLabel lblIncomePerKilometer;
+    /**
+     * Labela koja se odnosi na polje za unos ID vrednosti tovara.
+     */
     private javax.swing.JLabel lblLoadId;
+    /**
+     * Labela koja se odnosi na tabelu za prikaz stavki tovara.
+     */
     private javax.swing.JLabel lblLoadItems;
+    /**
+     * Panel koji sadrzi graficke komponente za rad sa tovarima
+     */
     private javax.swing.JPanel pnlLoadData;
+    /**
+     * Scroll pane koji pripada tabeli za prikaz stavki tovara.
+     */
     private javax.swing.JScrollPane spaneLoadItems;
+    /**
+     * Tabela za prikaz stavki tovara.
+     */
     private javax.swing.JTable tableLoadItems;
+    /**
+     * Tekstualno polje za unos datuma dolaska.
+     */
     private javax.swing.JTextField txtArrivalDate;
+    /**
+     * Tekstualno polje za unos vremena dolaska.
+     */
     private javax.swing.JTextField txtArrivalTime;
+    /**
+     * Tekstualno polje za unos datuma polaska.
+     */
     private javax.swing.JTextField txtDepartureDate;
+    /**
+     * Tekstualno polje za unos vremena polaska.
+     */
     private javax.swing.JTextField txtDepartureTime;
+    /**
+     * Tekstualno polje za unos prihoda po predjenom kilometru.
+     */
     private javax.swing.JTextField txtIncomePerKilometer;
+    /**
+     * Tekstualno polje za unos ID vrednosti tovara. Onemogucen je unos novih vrednosti, vec ovo polje sluzi samo za prikaz ID vrednosti sacuvane u bazi podataka.
+     */
     private javax.swing.JTextField txtLoadId;
+    /**
+     * Tekstualno polje za unos datuma za potrebe procesa pretrage.
+     */
     private javax.swing.JTextField txtSearchDate;
     
+    /**
+     * Kreira table model za rad sa tovarima, a takodje i preuzima listu vozaca iz baze podataka i elemente te liste ubacuje u padajuci meni sa vozacima.
+     * @throws Exception - Ukoliko dodje do greske prilikom preuzimanja liste vozaca iz baze podataka.
+     */
     private void prepareView() throws Exception {
         LoadTableModel model = new LoadTableModel(new TruckLoad());
         tableLoadItems.setModel(model);

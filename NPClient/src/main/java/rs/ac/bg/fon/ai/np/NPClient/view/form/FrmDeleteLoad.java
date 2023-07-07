@@ -13,15 +13,32 @@ import rs.ac.bg.fon.ai.np.NPClient.view.form.component.table.LoadTableModel;
 import rs.ac.bg.fon.ai.np.NPCommon.domain.Driver;
 import rs.ac.bg.fon.ai.np.NPCommon.domain.TruckLoad;
 
+/**
+ * Predstavlja formu koja je namenjena za brisanje odredjenog tovara iz baze podataka.
+ * 
+ * @author Aleksa Petrovic
+ * @since 1.1.0
+ *
+ */
 public class FrmDeleteLoad extends javax.swing.JDialog {
 
+	/**
+	 * Konstruktor koji sluzi za kreiranje komponenti forme, njihovo inicijalno pozicioniranje i postavljanje njihovog ponasanja, kao i upisivanje pocetnih vrednosti.
+	 * 
+	 * @param parent - JFrame prozor iz kog je pozvan ovaj JDialog prozor.
+	 * @param modal - Boolean vrednost koja odredjuje da li je JDialog prozor modalan.
+	 * @throws Exception - Ukoliko dodje do greske prilikom pripreme izgleda forme i podataka na njoj.
+	 */
     public FrmDeleteLoad(java.awt.Frame parent, boolean modal) throws Exception {
         super(parent, modal);
         initComponents();
         setLocationRelativeTo(parent);
         prepareView();
     }
-                        
+    
+    /**
+     * Kreira komponente koje ce biti postavljene na formu i vrsi njihovo inicijalno podesavanje.
+     */
     private void initComponents() {
 
         txtSearchDate = new javax.swing.JTextField();
@@ -244,6 +261,10 @@ public class FrmDeleteLoad extends javax.swing.JDialog {
         pack();
     }                       
 
+    /**
+     * Pretrazuje tovare ciji datum polaska odgovara datumu unesenom u polje za pretragu.
+     * @param evt - Predstavlja dogadjaj koji se desio nad dugmetom (klik).
+     */
     private void btnSearchLoadsActionPerformed(java.awt.event.ActionEvent evt) {                                               
         try {
             try {
@@ -271,6 +292,10 @@ public class FrmDeleteLoad extends javax.swing.JDialog {
         }
     }                                              
 
+    /**
+     * Ucitava podatke o tovaru u odgovarajuca polja na formi.
+     * @param evt - Predstavlja dogadjaj koji se desio nad dugmetom (klik).
+     */
     private void btnChooseActionPerformed(java.awt.event.ActionEvent evt) {                                          
         try {
             TruckLoad load = (TruckLoad)cbLoads.getSelectedItem();
@@ -302,6 +327,10 @@ public class FrmDeleteLoad extends javax.swing.JDialog {
         
     }                                         
 
+    /**
+     * Brise tovar iz baze podataka sa datom ID vrednoscu, kao i sve stavke tovara koje se vezuju za njega.
+     * @param evt - Predstavlja dogadjaj koji se desio nad dugmetom (klik).
+     */
     private void btnDeleteActionPerformed(java.awt.event.ActionEvent evt) {                                          
         try {
             LoadTableModel model = (LoadTableModel) tableLoadItems.getModel();
@@ -315,32 +344,108 @@ public class FrmDeleteLoad extends javax.swing.JDialog {
             JOptionPane.showMessageDialog(this, e.getMessage());
         }
     }                                         
-                    
+    
+    /**
+     * Dugme za upisivanje podataka o izabranom tovaru u odgovarajuca polja na formi.
+     */
     private javax.swing.JButton btnChoose;
+    /**
+     * Dugme za brisanje tovara iz baze podataka.
+     */
     private javax.swing.JButton btnDelete;
+    /**
+     * Dugme za pretragu tovara prema datumu unetom u polje za pretragu.
+     */
     private javax.swing.JButton btnSearchLoads;
+    /**
+     * Padajuci meni sa listom vozaca, pri cemu je selektovani vozac angazovan za prevoz tovara. Onemoguceno na formi za brisanje.
+     */
     private javax.swing.JComboBox<Driver> cbDrivers;
+    /**
+     * Padajuci meni sa listom tovara koji ispunjavaju uslove pretrage.
+     */
     private javax.swing.JComboBox<TruckLoad> cbLoads;
+    /**
+     * Labela koja se odnosi na polje za unos datuma dolaska.
+     */
     private javax.swing.JLabel lblArrivalDate;
+    /**
+     * Labela koja se odnosi na polje za unos vremena dolaska.
+     */
     private javax.swing.JLabel lblArrivalTime;
+    /**
+     * Labela koja se odnosi na polje za unos datuma polaska.
+     */
     private javax.swing.JLabel lblDepartureDate;
+    /**
+     * Labela koja se odnosi na polje za unos vremena polaska.
+     */
     private javax.swing.JLabel lblDepartureTime;
+    /**
+     * Labela koja se odnosi na padajuci meni sa vozacima.
+     */
     private javax.swing.JLabel lblDriver;
+    /**
+     * Labela koja se odnosi na polje za unos datum polaska za potrebe pretrage.
+     */
     private javax.swing.JLabel lblEnterStartDate;
+    /**
+     * Labela koja se odnosi na polje za prihoda po predjenom kilometru.
+     */
     private javax.swing.JLabel lblIncomePerKilometer;
+    /**
+     * Labela koja se odnosi na polje za unos ID vrednosti tovara.
+     */
     private javax.swing.JLabel lblLoadId;
+    /**
+     * Labela koja se odnosi na tabelu sa stavkama tovara.
+     */
     private javax.swing.JLabel lblLoadItems;
+    /**
+     * Panel koji obuhvata komponente koje se odnose na rad sa podacima vezanim za tovar.
+     */
     private javax.swing.JPanel pnlLoadData;
+    /**
+     * Scroll pane koji predstavlja komponentu neophodnu za funkcionisanje tabele za rad sa stavkama tovara.
+     */
     private javax.swing.JScrollPane spaneLoadItems;
+    /**
+     * Tabela za rad sa stavkama tovara. Onemoguceno na formi za brisanje.
+     */
     private javax.swing.JTable tableLoadItems;
+    /**
+     * Polje za unos datuma dolaska. Onemoguceno na formi za brisanje.
+     */
     private javax.swing.JTextField txtArrivalDate;
+    /**
+     * Polje za unos vremena dolaska. Onemoguceno na formi za brisanje.
+     */
     private javax.swing.JTextField txtArrivalTime;
+    /**
+     * Polje za unos datuma polaska. Onemoguceno na formi za brisanje.
+     */
     private javax.swing.JTextField txtDepartureDate;
+    /**
+     * Polje za unos vremena polaska. Onemoguceno na formi za brisanje.
+     */
     private javax.swing.JTextField txtDepartureTime;
+    /**
+     * Polje za unos prihoda po predjenom kilometru. Onemoguceno na formi za brisanje.
+     */
     private javax.swing.JTextField txtIncomePerKilometer;
+    /**
+     * Polje za unos ID vrednosti tovara. Onemoguceno na formi za brisanje.
+     */
     private javax.swing.JTextField txtLoadId;
+    /**
+     * Polje za unos datuma polaska za potrebe pretrage.
+     */
     private javax.swing.JTextField txtSearchDate;                   
     
+    /**
+     * Kreira table model za rad sa tovarima, a takodje i preuzima listu vozaca iz baze podataka i elemente te liste ubacuje u padajuci meni sa vozacima.
+     * @throws Exception - Ukoliko dodje do greske prilikom preuzimanja liste vozaca iz baze podataka.
+     */
     private void prepareView() throws Exception {
         LoadTableModel model = new LoadTableModel(new TruckLoad());
         tableLoadItems.setModel(model);

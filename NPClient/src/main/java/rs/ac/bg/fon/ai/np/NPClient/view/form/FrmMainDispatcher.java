@@ -2,13 +2,28 @@ package rs.ac.bg.fon.ai.np.NPClient.view.form;
 
 import javax.swing.JFrame;
 
+/**
+ * Predstavlja formu koja je namenjena korisnicima sa ulogom dispecera.
+ * 
+ * Sadrzi meni sa opcijama za pozivanje razlicitih drugih formi za rad sa tovarima.
+ * 
+ * @author Aleksa Petrovic
+ * @since 1.1.0
+ *
+ */
 public class FrmMainDispatcher extends javax.swing.JFrame {
 
+	/**
+	 * Konstruktor koji sluzi za kreiranje komponenti forme, njihovo inicijalno pozicioniranje i postavljanje njihovog ponasanja.
+	 */
     public FrmMainDispatcher() {
         initComponents();
         this.setExtendedState(JFrame.MAXIMIZED_BOTH);
     }
-                         
+       
+    /**
+     * Kreira komponente koje ce biti postavljene na formu i vrsi njihovo inicijalno podesavanje.
+     */
     private void initComponents() {
 
         jMenuBar = new javax.swing.JMenuBar();
@@ -74,6 +89,10 @@ public class FrmMainDispatcher extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }                        
 
+    /**
+     * Otvara formu za dodavanje novog tovara.
+     * @param evt - Predstavlja dogadjaj koji se desio nad stavkom menija (klik).
+     */
     private void jmiAddLoadActionPerformed(java.awt.event.ActionEvent evt) {                                           
         try {
             (new FrmAddLoad(this, true)).setVisible(true);
@@ -82,6 +101,10 @@ public class FrmMainDispatcher extends javax.swing.JFrame {
         }
     }                                          
 
+    /**
+     * Otvara formu za izmenu odredjenog tovara.
+     * @param evt - Predstavlja dogadjaj koji se desio nad stavkom menija (klik).
+     */
     private void jmiEditLoadActionPerformed(java.awt.event.ActionEvent evt) {                                            
         try {
             (new FrmEditLoad(this, true)).setVisible(true);
@@ -90,6 +113,10 @@ public class FrmMainDispatcher extends javax.swing.JFrame {
         }
     }                                           
 
+    /**
+     * Otvara formu za brisanje odredjenog tovara.
+     * @param evt - Predstavlja dogadjaj koji se desio nad stavkom menija (klik).
+     */
     private void jmiDeleteLoadActionPerformed(java.awt.event.ActionEvent evt) {                                              
         try {
             (new FrmDeleteLoad(this, true)).setVisible(true);
@@ -98,6 +125,10 @@ public class FrmMainDispatcher extends javax.swing.JFrame {
         }
     }                                             
 
+    /**
+     * Otvara formu za pretragu tovara.
+     * @param evt - Predstavlja dogadjaj koji se desio nad stavkom menija (klik).
+     */
     private void jmiFindLoadActionPerformed(java.awt.event.ActionEvent evt) {                                            
         try {
             (new FrmFindLoads(this, true)).setVisible(true);
@@ -105,11 +136,29 @@ public class FrmMainDispatcher extends javax.swing.JFrame {
             ex.printStackTrace();
         }
     }                                           
-                   
+    
+    /**
+     * Meni sa karticama koje pruzaju opcije za otvaranje razlicitih prozora i dalje obavljanje razlicitih operacija koje su u nadleznosti dispecera.
+     */
     private javax.swing.JMenuBar jMenuBar;
+    /**
+     * Padajuci meni sa opcijama za otvaranje prozora za rad sa tovarima.
+     */
     private javax.swing.JMenu jMenuLoad;
+    /**
+     * Stavka padajuceg menija za rad sa tovarima koja otvara prozor za dodavanje novog tovara.
+     */
     private javax.swing.JMenuItem jmiAddLoad;
+    /**
+     * Stavka padajuceg menija za rad sa tovarima koja otvara prozor za brisanje odredjenog tovara.
+     */
     private javax.swing.JMenuItem jmiDeleteLoad;
+    /**
+     * Stavka padajuceg menija za rad sa tovarima koja otvara prozor za izmenu odgovarajuceg tovara.
+     */
     private javax.swing.JMenuItem jmiEditLoad;
+    /**
+     * Stavka padajuceg menija za rad sa tovarima koja otvara prozor za pronalazenje zeljenog tovara.
+     */
     private javax.swing.JMenuItem jmiFindLoad;                
 }

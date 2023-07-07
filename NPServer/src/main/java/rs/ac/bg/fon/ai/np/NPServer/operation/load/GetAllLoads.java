@@ -6,8 +6,19 @@ import rs.ac.bg.fon.ai.np.NPCommon.domain.LoadItem;
 import rs.ac.bg.fon.ai.np.NPCommon.domain.TruckLoad;
 import rs.ac.bg.fon.ai.np.NPServer.operation.AbstractGenericOperation;
 
+/**
+ * Predstavlja specificnu operaciju koja ima za cilj da sve tovare iz baze podataka postavi u listu.
+ * 
+ * Sadrzi listu tovara.
+ * 
+ * @author Aleksa Petrovic
+ * @since 1.1.0
+ *
+ */
 public class GetAllLoads extends AbstractGenericOperation{
-
+	/**
+	 * Lista tovara.
+	 */
     List<TruckLoad> loads;
     
     @Override
@@ -28,6 +39,10 @@ public class GetAllLoads extends AbstractGenericOperation{
         }
     }
     
+    /**
+     * Vraca listu tovara.
+     * @return loads - Lista tovara.
+     */
     public List<TruckLoad> getLoads() {
         return loads;
     }

@@ -15,6 +15,17 @@ import rs.ac.bg.fon.ai.np.NPCommon.domain.GenericEntity;
 import rs.ac.bg.fon.ai.np.NPServer.repository.db.DbConnectionFactory;
 import rs.ac.bg.fon.ai.np.NPServer.repository.db.DbRepository;
 
+/**
+ * Predstavlja genericku implementaciju repositorijuma za izvrsavanje operacija nad bazom podataka. Sadrzi metode za dodavanje, brisanje, izmenu, kao i izlistavanje podataka iz baze.
+ * 
+ * S obzirom da se radi o generickoj implementaciji metode ove klase ce raditi za bilo koju domensku klasu koja implementira interfejs GenericEntity.
+ * 
+ * Implementira interfejs DbRepository pri cemu postavlja tip na GenericEntity
+ * 
+ * @author Aleksa Petrovic
+ * @since 1.1.0
+ *
+ */
 public class RepositoryDbGeneric implements DbRepository<GenericEntity> {
 
     @Override
@@ -84,7 +95,6 @@ public class RepositoryDbGeneric implements DbRepository<GenericEntity> {
         try {
             Connection connection = DbConnectionFactory.getInstance().getConnection();
             String query = "UPDATE " + param.getTableName() + " SET " + param.getUpdateValues() + " WHERE " + param.getWhereConditionEditOperation();
-            System.out.println(query);
             Statement statement = connection.createStatement();
             statement.executeUpdate(query);
             statement.close();
@@ -98,7 +108,6 @@ public class RepositoryDbGeneric implements DbRepository<GenericEntity> {
         try {
             Connection connection = DbConnectionFactory.getInstance().getConnection();
             String query = "DELETE FROM " + param.getTableName() + " WHERE " + param.getWhereCondition();
-            System.out.println(query);
             Statement statement = connection.createStatement();
             statement.executeUpdate(query);
             statement.close();

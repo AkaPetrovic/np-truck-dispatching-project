@@ -4,17 +4,51 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Objects;
 
-
+/**
+ * Predstavlja vozaca kamiona.
+ * 
+ * Sadrzi ID, ime, prezime, datum rodjenja i podatak o tome koji kamion vozi.
+ * 
+ * @author Aleksa Petrovic
+ * @since 1.1.0
+ *
+ */
 public class Driver implements GenericEntity{
+	/**
+	 * ID vozaca u vidu Long vrednosti (ceo broj).
+	 */
     private Long id;
+    /**
+     * Ime vozaca kao String.
+     */
     private String name;
+    /**
+     * Prezime vozaca kao String.
+     */
     private String surname;
+    /**
+     * Datum rodjenja vozaca.
+     */
     private Date birthday;
+    /**
+     * Kamion tipa Truck koji vozac vozi.
+     */
     private Truck truck;
 
+    /**
+     * Prazan konstruktor za kreiranje jedne instance vozaca sa podrazumevanim vrednostima za njegova polja.
+     */
     public Driver() {
     }
-
+    
+    /**
+     * Parametrizovani konstruktor koji sluzi za kreiranje instance vozaca sa specificnim vrednostima za njegova polja.
+     * @param id - ID vozaca koji mu se dodeljuje pri kreiranju.
+     * @param name - Ime vozaca koje mu se dodeljuje prilikom kreiranja.
+     * @param surname - Prezime vozaca koje mu se dodeljuje prilikom kreiranja.
+     * @param birthday - Datum rodjenja vozaca koji mu se dodeljuje prilikom kreiranja.
+     * @param truck - Kamion klase Truck koji se vezuje za vozaca prilikom kreiranja instance vozaca.
+     */
     public Driver(Long id, String name, String surname, Date birthday, Truck truck) {
         this.id = id;
         this.name = name;
@@ -23,6 +57,10 @@ public class Driver implements GenericEntity{
         this.truck = truck;
     }
 
+    /**
+     * Vraca ID vozaca.
+     * @return id - ID vozaca kao Long vrednost (ceo broj).
+     */
     public Long getId() {
         return id;
     }
@@ -30,39 +68,76 @@ public class Driver implements GenericEntity{
     public void setId(Long id) {
         this.id = id;
     }
-
+    
+    /**
+     * Vraca ID vozaca.
+     * @return id - ID vozaca kao Long vrednost (ceo broj).
+     */
     public String getName() {
         return name;
     }
-
+    
+    /**
+     * Postavlje novu vrednost za atribut name vozaca.
+     * @param name - Nova vrednost za atribut name.
+     */
     public void setName(String name) {
         this.name = name;
     }
 
+    /**
+     * Vraca prezime vozaca.
+     * @return surname - Prezime vozaca kao String.
+     */
     public String getSurname() {
         return surname;
     }
 
+    /**
+     * Postavlje novu vrednost za atribut surname vozaca.
+     * @param surname - Nova vrednost za atribut surname.
+     */
     public void setSurname(String surname) {
         this.surname = surname;
     }
 
+    /**
+     * Vraca datum rodjenja vozaca.
+     * @return birthday - Datum rodjenja vozaca kao objekat klase Date.
+     */
     public Date getBirthday() {
         return birthday;
     }
 
+    /**
+     * Postavlje novu vrednost za atribut birthday vozaca.
+     * @param birthday - Nova vrednost za atribut birthday.
+     */
     public void setBirthday(Date birthday) {
         this.birthday = birthday;
     }
 
+    /**
+     * Vraca podatak o kamionu vozaca.
+     * @return truck - Kamion koji vozac vozi klase Truck.
+     */
     public Truck getTruck() {
         return truck;
     }
 
+    /**
+     * Postavlje novu vrednost za atribut truck vozaca.
+     * @param truck - Nova vrednost za atribut truck.
+     */
     public void setTruck(Truck truck) {
         this.truck = truck;
     }
 
+    /**
+	 * Racuna hash code na osnovu svih atributa vozaca.
+	 * 
+	 * @return hash - Hash code izracunat na osnovu svih atributa vozaca.
+	 */
     @Override
     public int hashCode() {
         int hash = 5;
@@ -74,6 +149,16 @@ public class Driver implements GenericEntity{
         return hash;
     }
 
+    /**
+	 * Poredi dva vozaca prema svim atributima.
+	 * 
+	 * @param obj - Predstavlja (drugi) objekat sa kojim ce se porediti instanca vozaca nad kojom je pozvana metoda equals().
+	 * @return 
+	 * <ul>
+	 * 		<li> true - ako je unet isti objekat ili ako su svi atributi isti </li>
+	 * 		<li> false - ako je unet null objekat ili ako uneti objekat nije klase Driver ili ako se uneti objekat razlikuje po vrednosti nekog atributa </li>
+	 * </ul>
+	 */
     @Override
     public boolean equals(Object obj) {
         if (this == obj) {
@@ -101,6 +186,11 @@ public class Driver implements GenericEntity{
         return Objects.equals(this.truck, other.truck);
     }
 
+    /**
+     * Vraca String reprezentaciju vozaca na osnovu svih atributa.
+     * 
+     * @return driver - String reprezentacija vozaca u odgovarajuce formatu.
+     */
     @Override
     public String toString() {
         SimpleDateFormat sdf = new SimpleDateFormat("dd.MM.yyyy.");

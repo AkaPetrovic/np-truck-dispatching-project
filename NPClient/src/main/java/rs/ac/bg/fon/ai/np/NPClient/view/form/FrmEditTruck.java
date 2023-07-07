@@ -12,15 +12,32 @@ import rs.ac.bg.fon.ai.np.NPCommon.domain.Manufacturer;
 import rs.ac.bg.fon.ai.np.NPCommon.domain.Truck;
 import rs.ac.bg.fon.ai.np.NPCommon.domain.TruckType;
 
+/**
+ * Predstavlja formu koja je namenjena za vrsenje izmena nad odredjenim kamionom iz baze podataka.
+ * 
+ * @author Aleksa Petrovic
+ * @since 1.1.0
+ *
+ */
 public class FrmEditTruck extends javax.swing.JDialog {
 
+	/**
+	 * Konstruktor koji sluzi za kreiranje komponenti forme, njihovo inicijalno pozicioniranje i postavljanje njihovog ponasanja, kao i upisivanje pocetnih vrednosti.
+	 * 
+	 * @param parent - JFrame prozor iz kog je pozvan ovaj JDialog prozor.
+	 * @param modal - Boolean vrednost koja odredjuje da li je JDialog prozor modalan.
+	 * @throws Exception - Ukoliko dodje do greske prilikom pripreme izgleda forme i podataka na njoj.
+	 */
     public FrmEditTruck(java.awt.Frame parent, boolean modal) throws Exception {
         super(parent, modal);
         initComponents();
         setLocationRelativeTo(parent);
         prepareView();
     }
-                        
+    
+    /**
+     * Kreira komponente koje ce biti postavljene na formu i vrsi njihovo inicijalno podesavanje.
+     */
     private void initComponents() {
 
         cbManufacturers = new javax.swing.JComboBox<>();
@@ -225,6 +242,10 @@ public class FrmEditTruck extends javax.swing.JDialog {
         pack();
     }                        
 
+    /**
+     * Pretrazuje kamione na osnovu selektovanog proizvodjaca iz liste proizvodjaca koji postoje u bazi podataka.
+     * @param evt - Predstavlja dogadjaj koji se desio nad dugmetom (klik).
+     */
     private void btnLoadTrucksActionPerformed(java.awt.event.ActionEvent evt) {                                              
         try {
             Manufacturer manufacturer = (Manufacturer)cbManufacturers.getSelectedItem();
@@ -247,6 +268,10 @@ public class FrmEditTruck extends javax.swing.JDialog {
         }
     }                                             
 
+    /**
+     * Ucitava podatke o kamionu u odgovarajuca polja na formi.
+     * @param evt - Predstavlja dogadjaj koji se desio nad dugmetom (klik).
+     */
     private void btnChooseActionPerformed(java.awt.event.ActionEvent evt) {                                          
         try {
             DecimalFormat df = new DecimalFormat("#.##");
@@ -279,6 +304,10 @@ public class FrmEditTruck extends javax.swing.JDialog {
         }
     }                                         
 
+    /**
+     * Cuva promene napravljene nad kamionom u bazi podataka.
+     * @param evt - Predstavlja dogadjaj koji se desio nad dugmetom (klik).
+     */
     private void btnSaveChangesActionPerformed(java.awt.event.ActionEvent evt) {                                               
         try{
             if(validateForm()){
@@ -301,31 +330,104 @@ public class FrmEditTruck extends javax.swing.JDialog {
             JOptionPane.showMessageDialog(this, ex.getMessage());
         }
     }                                              
-                    
+    
+    /**
+     * Dugme za upisivanje podataka o izabranom vozacu u odgovarajuca polja na formi.
+     */
     private javax.swing.JButton btnChoose;
+    /**
+     * Dugme za pretragu kamiona prema proizvodjacu selektovanom u okviru padajuceg menija.
+     */
     private javax.swing.JButton btnLoadTrucks;
+    /**
+     * Dugme za cuvanje promena napravljenih nad kamionom u bazi podataka.
+     */
     private javax.swing.JButton btnSaveChanges;
+    /**
+     * Padajuci meni sa proizvodjacima kamiona koji sluzi za odredjivanje parametara za proces pretrage kamiona.
+     */
     private javax.swing.JComboBox<Manufacturer> cbManufacturers;
+    /**
+     * Padajuci meni sa proizvodjacima kamiona koji se koristi kako bi se odredjeni proizvodjac vezao za odredjeni kamion.
+     */
     private javax.swing.JComboBox<Manufacturer> cbManufacturersEdit;
+    /**
+     * Padajuci meni sa tipovima kamiona.
+     */
     private javax.swing.JComboBox<TruckType> cbTruckTypes;
+    /**
+     * Padajuci meni sa kamionima koji predstavljaju rezultat pretrage na osnovu selektovanog proizvodjaca.
+     */
     private javax.swing.JComboBox<Truck> cbTrucks;
+    /**
+     * Panel koji sadrzi graficke komponente za rad sa kamionom.
+     */
     private javax.swing.JPanel jpnlTruckData;
+    /**
+     * Labela koja se odnosi na polje za unos nosivosti kamiona.
+     */
     private javax.swing.JLabel lblCarryingCapacity;
+    /**
+     * Labela koja se odnosi na padajuci meni sa proizvodjacima kamiona.
+     */
     private javax.swing.JLabel lblChooseManufacturerFromTheList;
+    /**
+     * Labela koja se odnosi na polje za unos ID vrednosti kamiona.
+     */
     private javax.swing.JLabel lblId;
+    /**
+     * Labela koja se odnosi na polje za unos broja predjenjih kilometara.
+     */
     private javax.swing.JLabel lblKilometersTravelled;
+    /**
+     * Labela koja se odnosi na padajuci meni za proizvodjacima kamiona.
+     */
     private javax.swing.JLabel lblManufacturer;
+    /**
+     * Labela koja se odnosi na polje za unos modela kamiona.
+     */
     private javax.swing.JLabel lblModel;
+    /**
+     * Labela koja se odnosi na polje za unos snage kamiona.
+     */
     private javax.swing.JLabel lblPower;
+    /**
+     * Labela koja se odnosi na padajuci meni tipova kamiona.
+     */
     private javax.swing.JLabel lblTruckType;
+    /**
+     * Labela koja se odnosi na polje za unos godine proizvodnje kamiona.
+     */
     private javax.swing.JLabel lblYear;
+    /**
+     * Tekstualno polje za unos nosivosti kamiona.
+     */
     private javax.swing.JTextField txtCarryingCapacity;
+    /**
+     * Tekstualno polje za unos ID vrednosti kamiona. Onemoguceno je unosenje novih vrednosti, vec je moguc samo prikaz.
+     */
     private javax.swing.JTextField txtId;
+    /**
+     * Tekstualno polje za unos broja predjenih kilometara kamiona.
+     */
     private javax.swing.JTextField txtKilometersTravelled;
+    /**
+     * Tekstualno polje za unos modela kamiona.
+     */
     private javax.swing.JTextField txtModel;
+    /**
+     * Tekstualno polje za unos snage kamiona.
+     */
     private javax.swing.JTextField txtPower;
+    /**
+     * Tekstualno polje za unos godine proizvodnje kamiona.
+     */
     private javax.swing.JTextField txtYear;            
 
+    /**
+     * Preuzima listu proizvodjaca kamiona i listu tipova kamiona iz baze podataka i elemente te liste ubacuje u odgovarajuce padajuce menije.
+     * @throws Exception - Ukoliko dodje do greske prilikom preuzimanja neke od listi iz baze podataka.
+     */
     private void prepareView() throws Exception {
         List <Manufacturer> manufacturers = Communication.getInstance().getAllManufactures(new Manufacturer());
         List <TruckType> truckTypes = Communication.getInstance().getAllTruckTypes(new TruckType());
@@ -343,6 +445,13 @@ public class FrmEditTruck extends javax.swing.JDialog {
         }
     }
 
+    /**
+     * Proverava da li je forma ispravno popunjena.
+     * 
+     * Polja ne smeju biti prazna. Kilometraza i  nosivost kamiona mogu biti decimalni brojevi sa maksimalno 2 decimalna mesta. Snaga i nosivost su maksimalno trocifreni, kilometraza je maksimalno sedmocifren broj.
+     * 
+     * @return true - Ukoliko je forma ispravno popunjena / false - Ukoliko forma nije ispravno popunjena.
+     */
     private boolean validateForm() {
         if(txtModel.getText().isEmpty() || txtPower.getText().isEmpty() || txtCarryingCapacity.getText().isEmpty() || txtKilometersTravelled.getText().isEmpty() || txtYear.getText().isEmpty()){
             JOptionPane.showMessageDialog(this, "You must fill out all the fields on the form");

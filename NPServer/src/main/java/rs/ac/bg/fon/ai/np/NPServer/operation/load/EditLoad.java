@@ -5,6 +5,13 @@ import rs.ac.bg.fon.ai.np.NPCommon.domain.TruckLoad;
 import rs.ac.bg.fon.ai.np.NPCommon.domain.util.LoadItemState;
 import rs.ac.bg.fon.ai.np.NPServer.operation.AbstractGenericOperation;
 
+/**
+ * Predstavlja specificnu operaciju koja ima za cilj da sacuva izmene napravljene na odredjenom tovaru u bazi podataka.
+ * 
+ * @author Aleksa Petrovic
+ * @since 1.1.0
+ *
+ */
 public class EditLoad extends AbstractGenericOperation{
 
     @Override
@@ -18,6 +25,7 @@ public class EditLoad extends AbstractGenericOperation{
             repository.edit(load);
 
             for(LoadItem item:load.getLoadItems()){
+            	System.out.println(item);
                 System.out.println(item.getState());
             }
             
