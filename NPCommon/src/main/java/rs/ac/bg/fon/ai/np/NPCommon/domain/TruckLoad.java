@@ -51,7 +51,7 @@ public class TruckLoad implements GenericEntity{
     /**
      * Lista stavki tovara. Implementacija je u vidu ArrayList-e.
      */
-    List<LoadItem> loadItems;
+    private List<LoadItem> loadItems;
 
     /**
      * Prazan konstruktor za kreiranje jedne instance tovara sa podrazumevanim vrednostima za njegova polja.
