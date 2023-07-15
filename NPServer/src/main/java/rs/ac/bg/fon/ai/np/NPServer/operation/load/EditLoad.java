@@ -23,11 +23,6 @@ public class EditLoad extends AbstractGenericOperation{
         try {
             TruckLoad load = (TruckLoad) param;
             repository.edit(load);
-
-            for(LoadItem item:load.getLoadItems()){
-            	System.out.println(item);
-                System.out.println(item.getState());
-            }
             
             for(LoadItem item:load.getLoadItems()){
                 if(item.getState().equals(LoadItemState.DELETE)){

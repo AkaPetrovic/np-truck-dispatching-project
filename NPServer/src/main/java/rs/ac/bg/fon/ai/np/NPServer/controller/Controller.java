@@ -243,6 +243,33 @@ public class Controller {
     }
     
     /**
+     * Vraca sve tovare iz baze podataka.
+     * @param load - Oznacava da metoda treba da vrati listu tovara.
+     * @return loads - Lista tovara iz baze podataka
+     * @throws Exception - Ukoliko nema nijednog tovara u bazi podataka.
+     */
+    public List<TruckLoad> getAllLoads(TruckLoad load) throws Exception {
+        List<Driver> drivers = getAllDrivers(new Driver());
+        GetAllLoads operation = new GetAllLoads();
+        operation.execute(load);
+        List<TruckLoad> loads = operation.getLoads();
+        
+        for(TruckLoad tl:loads){
+            for(Driver dr:drivers){
+                if(tl.getDriver().getId().equals(dr.getId())){
+                    tl.setDriver(dr);
+                    break;
+                }
+            }
+        }
+        
+        if(loads.isEmpty()){
+            throw new Exception("No truck loads were found in the database.");
+        }
+        return loads;
+    }
+    
+    /**
      * Vraca sve tovare koji odgovaraju po odredjenim parametrima tovaru prosledjenom u pozivu metode.
      * @param load - Tovar koji sluzi za poredjenje sa svim vozacima iz baze podataka.
      * @return loads - Lista tovara koji odgovaraju prosledjenom tovaru.
