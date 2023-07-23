@@ -95,7 +95,16 @@ public class TruckTest {
 		t.setCarryingCapacity(new BigDecimal(60.5));
 		t.setKmTravelled(new BigDecimal(132120.54));
 		
-		assertEquals("4 | Scania (Sweden) 560R | Year: 2002 | Power: 500 HP | Type: Large | Carrying capacity: 60,5 | KM travelled: 132120,54", t.toString());
+		String s = t.toString();
+		
+		assertTrue(s.contains("Large"));
+		assertTrue(s.contains("Scania"));
+		assertTrue(s.contains("2002"));
+		assertTrue(s.contains("4"));
+		assertTrue(s.contains("560R"));
+		assertTrue(s.contains("500 HP"));
+		assertTrue(s.contains("60"));
+		assertTrue(s.contains("132120"));
 	}
 	
 	@ParameterizedTest

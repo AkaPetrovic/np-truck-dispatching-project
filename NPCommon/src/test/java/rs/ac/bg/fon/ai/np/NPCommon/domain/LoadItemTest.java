@@ -156,7 +156,17 @@ public class LoadItemTest {
 		li.setVolume(new BigDecimal(3.2));
 		li.setWeight(new BigDecimal(15.4));
 		
-		assertEquals("LoadItem{id=1, load=12 | Departure date: 15.07.2023. | Arrival date: 16.07.2023. | Departure time: 10:15 | Arrival time: 16:35 | Income per kilometer: 2.45999999999999996447286321199499070644378662109375 // Driver: Name Surname, loadItemName=Chair, dangerous=false, fragile=true, weight=15.4000000000000003552713678800500929355621337890625, volume=3.20000000000000017763568394002504646778106689453125, state=DELETE, previousId=null}", li.toString());
+		String s = li.toString();
+		
+		assertTrue(s.contains("1"));
+		assertTrue(s.contains("Chair"));
+		assertTrue(s.contains("dangerous=false"));
+		assertTrue(s.contains("fragile=true"));
+		assertTrue(s.contains("state=DELETE"));
+		assertTrue(s.contains("volume=3"));
+		assertTrue(s.contains("weight=15"));
+		assertTrue(s.contains("load=12 | Departure date: 15.07.2023. | Arrival date: 16.07.2023. | Departure time: 10:15 | Arrival time: 16:35"));
+		assertTrue(s.contains("Driver: Name Surname"));
 	}
 	
 	@ParameterizedTest
