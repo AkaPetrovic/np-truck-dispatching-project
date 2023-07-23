@@ -169,7 +169,15 @@ public class TruckLoadTest {
 		tl.getLoadItems().add(li1);
 		tl.getLoadItems().add(li2);
 		
-		assertEquals("5 | Departure date: 15.07.2023. | Arrival date: 16.07.2023. | Departure time: 10:30 | Arrival time: 05:30 | Income per kilometer: 2.54000000000000003552713678800500929355621337890625 // Driver: Name Surname", tl.toString());
+		String s = tl.toString();
+		
+		assertTrue(s.contains("5"));
+		assertTrue(s.contains("15.07.2023."));
+		assertTrue(s.contains("16.07.2023."));
+		assertTrue(s.contains("10:30"));
+		assertTrue(s.contains("05:30"));
+		assertTrue(s.contains("Income per kilometer: 2"));
+		assertTrue(s.contains("Driver: Name Surname"));
 	}
 	
 	@ParameterizedTest

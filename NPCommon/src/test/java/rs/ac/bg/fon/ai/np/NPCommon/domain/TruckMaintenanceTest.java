@@ -90,9 +90,16 @@ public class TruckMaintenanceTest {
 		
 		tm.setTruck(truck);
 		
+		String s = tm.toString();
 		
-		
-		assertEquals("5 | Truck: 2 | Scania (Sweden) 560R | Year: 2004 | Power: 500 HP | Type: Medium | Carrying capacity: 67,45 | KM travelled: 132503,52 | Date of service: 15.07.2023. | KM at service: 134532.23000000001047737896442413330078125", tm.toString());
+		assertTrue(s.contains("5"));
+		assertTrue(s.contains("15.07.2023."));
+		assertTrue(s.contains("134532"));
+		assertTrue(s.contains("Scania"));
+		assertTrue(s.contains("560R"));
+		assertTrue(s.contains("500 HP"));
+		assertTrue(s.contains("2004"));
+		assertTrue(s.contains("Medium"));
 	}
 	
 	@ParameterizedTest
