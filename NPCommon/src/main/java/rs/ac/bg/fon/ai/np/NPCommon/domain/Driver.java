@@ -50,11 +50,11 @@ public class Driver implements GenericEntity{
      * @param truck - Kamion klase Truck koji se vezuje za vozaca prilikom kreiranja instance vozaca.
      */
     public Driver(Long id, String name, String surname, Date birthday, Truck truck) {
-        this.id = id;
-        this.name = name;
-        this.surname = surname;
-        this.birthday = birthday;
-        this.truck = truck;
+        setId(id);
+        setName(name);
+        setSurname(surname);
+        setBirthday(birthday);
+        setTruck(truck);
     }
 
     /**

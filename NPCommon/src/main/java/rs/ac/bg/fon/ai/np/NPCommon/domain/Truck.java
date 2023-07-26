@@ -65,14 +65,14 @@ public class Truck implements GenericEntity{
      * @param truckType - Objekat koji predstavlja tip kamiona i koji se vezuje za sam kamion prilikom njegovog kreiranja.
      */
     public Truck(Long id, String model, int power, BigDecimal kmTravelled, int year, BigDecimal carryingCapacity, Manufacturer manufacturer, TruckType truckType) {
-        this.id = id;
-        this.model = model;
-        this.power = power;
-        this.kmTravelled = kmTravelled;
-        this.year = year;
-        this.carryingCapacity = carryingCapacity;
-        this.manufacturer = manufacturer;
-        this.truckType = truckType;
+        setId(id);
+        setModel(model);
+        setPower(power);
+        setKmTravelled(kmTravelled);
+        setYear(year);
+        setCarryingCapacity(carryingCapacity);
+        setManufacturer(manufacturer);
+        setTruckType(truckType);
     }
 
     /**

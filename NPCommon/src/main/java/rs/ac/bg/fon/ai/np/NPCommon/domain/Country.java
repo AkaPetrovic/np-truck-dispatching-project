@@ -33,8 +33,8 @@ public class Country implements GenericEntity {
      * @param name - Naziv drzave koji joj se dodaje prilikom njenog kreiranja
      */
     public Country(Long id, String name) {
-        this.id = id;
-        this.name = name;
+        setId(id);
+        setName(name);
     }
 
     /**

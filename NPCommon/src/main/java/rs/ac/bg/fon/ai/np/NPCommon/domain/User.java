@@ -55,12 +55,12 @@ public class User implements GenericEntity {
      * @param role - Uloga korisnika koju ce imati u sistemu, koja mu se dodeljuje prilikom kreiranja. Predvidjene dozvoljene vrednosti su "manager" i "dispatcher".
      */
     public User(Long id, String firstname, String lastname, String username, String password, String role) {
-        this.id = id;
-        this.firstname = firstname;
-        this.lastname = lastname;
-        this.username = username;
-        this.password = password;
-        this.role = role;
+        setId(id);
+        setFirstname(firstname);
+        setLastname(lastname);
+        setUsername(username);
+        setPassword(password);
+        setRole(role);
     }
 
     /**

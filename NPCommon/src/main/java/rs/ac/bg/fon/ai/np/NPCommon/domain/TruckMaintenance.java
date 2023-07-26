@@ -46,10 +46,10 @@ public class TruckMaintenance implements GenericEntity {
      * @param truck - Kamion koji se vezuje za servis prilikom njegovog kreiranja.
      */
     public TruckMaintenance(Long id, Date dateOfService, BigDecimal kmAtService, Truck truck) {
-        this.id = id;
-        this.dateOfService = dateOfService;
-        this.kmAtService = kmAtService;
-        this.truck = truck;
+        setId(id);
+        setDateOfService(dateOfService);
+        setKmAtService(kmAtService);
+        setTruck(truck);
     }
     
     /**

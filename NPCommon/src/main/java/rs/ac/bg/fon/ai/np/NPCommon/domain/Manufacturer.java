@@ -38,9 +38,9 @@ public class Manufacturer implements GenericEntity{
      * @param country - Drzava iz koje proizvodjac dolazi koja se dodeljuje prilikom kreiranja.
      */
     public Manufacturer(Long id, String name, Country country) {
-        this.id = id;
-        this.name = name;
-        this.country = country;
+        setId(id);
+        setName(name);
+        setCountry(country);
     }
 
     /**

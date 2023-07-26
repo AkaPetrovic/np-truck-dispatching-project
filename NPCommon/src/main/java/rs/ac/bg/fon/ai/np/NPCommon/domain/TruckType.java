@@ -33,8 +33,8 @@ public class TruckType implements GenericEntity{
      * @param name - Naziv tipa kamiona koji se dodeljuje samom tipu prilikom njegovog kreiranja.
      */
     public TruckType(Long id, String name) {
-        this.id = id;
-        this.name = name;
+        setId(id);
+        setName(name);
     }
     
     /**

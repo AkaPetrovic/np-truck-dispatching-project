@@ -71,14 +71,14 @@ public class TruckLoad implements GenericEntity{
      * @param driver - Vozac koji se vezuje za prevoz samog tovara.
      */
     public TruckLoad(Long id, Date startDate, Date endDate, LocalTime startTime, LocalTime endTime, BigDecimal incomePerKilometer, Driver driver) {
-        this.id = id;
-        this.startDate = startDate;
-        this.endDate = endDate;
-        this.startTime = startTime;
-        this.endTime = endTime;
-        this.incomePerKilometer = incomePerKilometer;
-        this.driver = driver;
-        this.loadItems = new ArrayList<>();
+        setId(id);
+        setStartDate(startDate);
+        setEndDate(endDate);
+        setStartTime(startTime);
+        setEndTime(endTime);
+        setIncomePerKilometer(incomePerKilometer);
+        setDriver(driver);
+        setLoadItems(new ArrayList<>());
     }
 
     /**

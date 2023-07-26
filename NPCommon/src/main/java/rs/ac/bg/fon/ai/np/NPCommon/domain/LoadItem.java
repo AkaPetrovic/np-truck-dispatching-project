@@ -71,14 +71,14 @@ public class LoadItem implements GenericEntity, Comparable<LoadItem>{
      * @param state - Pocetno stanje stavke tovara u smislu operacije koja je potrebna da se izvrsi nad bazom podataka.
      */
     public LoadItem(Long id, TruckLoad load, String loadItemName, boolean isDangerous, boolean fragile, BigDecimal weight, BigDecimal volume, LoadItemState state) {
-        this.id = id;
-        this.load = load;
-        this.loadItemName = loadItemName;
-        this.dangerous = isDangerous;
-        this.fragile = fragile;
-        this.weight = weight;
-        this.volume = volume;
-        this.state = state;
+        setId(id);
+        setLoad(load);
+        setLoadItemName(loadItemName);
+        setIsDangerous(isDangerous);
+        setIsFragile(fragile);
+        setWeight(weight);
+        setVolume(volume);
+        setState(state);
     }
 
     /**
