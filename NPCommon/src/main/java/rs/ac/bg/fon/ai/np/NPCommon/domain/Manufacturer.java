@@ -53,6 +53,12 @@ public class Manufacturer implements GenericEntity{
 
     @Override
     public void setId(Long id) {
+    	if(id == null)
+    		throw new NullPointerException("ID vrednost ne sme biti null.");
+    	
+    	if(id < 1)
+    		throw new IllegalArgumentException("ID vrednost ne sme biti manja od 1.");
+    	
         this.id = id;
     }
 
@@ -67,8 +73,17 @@ public class Manufacturer implements GenericEntity{
     /**
      * Postavlje novu vrednost za atribut name proizvodjaca.
      * @param name - Nova vrednost za atribut name.
+     * 
+     * @throws NullPointerException - ako se unese null vrednost za name
+	 * @throws IllegalArgumentException - ako je name prazan String
      */
     public void setName(String name) {
+    	if(name == null)
+    		throw new NullPointerException("Ime proizvodjaca ne sme biti null.");
+    	
+    	if(name.isEmpty())
+    		throw new IllegalArgumentException("Ime proizvodjaca ne sme biti prazan String.");
+    	
         this.name = name;
     }
 
@@ -83,8 +98,13 @@ public class Manufacturer implements GenericEntity{
     /**
      * Postavlje novu vrednost za atribut country proizvodjaca.
      * @param country - Nova vrednost za atribut country.
+     * 
+     * @throws NullPointerException - ako se unese null vrednost za country
      */
     public void setCountry(Country country) {
+    	if(country == null)
+    		throw new NullPointerException("Drzava proizvodjaca ne sme biti null.");
+    	
         this.country = country;
     }
 

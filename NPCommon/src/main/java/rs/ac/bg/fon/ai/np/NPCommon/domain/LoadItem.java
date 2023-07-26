@@ -90,6 +90,12 @@ public class LoadItem implements GenericEntity, Comparable<LoadItem>{
     }
 
     public void setId(Long id) {
+    	if(id == null)
+    		throw new NullPointerException("ID vrednost ne sme biti null.");
+    	
+    	if(id < 1)
+    		throw new IllegalArgumentException("ID vrednost ne sme biti manja od 1.");
+    	
         this.id = id;
     }
 
@@ -104,8 +110,13 @@ public class LoadItem implements GenericEntity, Comparable<LoadItem>{
     /**
      * Postavlje novu vrednost za atribut load stavke tovara.
      * @param load - Nova vrednost za atribut load.
+     * 
+     * @throws NullPointerException - ako se unese null vrednost za load
      */
     public void setLoad(TruckLoad load) {
+    	if(load == null)
+    		throw new NullPointerException("Tovar ne sme biti null.");
+    	
         this.load = load;
     }
 
@@ -120,8 +131,17 @@ public class LoadItem implements GenericEntity, Comparable<LoadItem>{
     /**
      * Postavlje novu vrednost za atribut loadItemName stavke tovara.
      * @param loadItemName - Nova vrednost za atribut loadItemName.
+     * 
+     * @throws NullPointerException - ako se unese null vrednost za loadItemName
+	 * @throws IllegalArgumentException - ako je loadItemName prazan String
      */
     public void setLoadItemName(String loadItemName) {
+    	if(loadItemName == null)
+    		throw new NullPointerException("Ime stavke tovara ne sme biti null.");
+    	
+    	if(loadItemName.isEmpty())
+    		throw new IllegalArgumentException("Ime stavke tovara ne sme biti prazan String.");
+    	
         this.loadItemName = loadItemName;
     }
 
@@ -168,8 +188,17 @@ public class LoadItem implements GenericEntity, Comparable<LoadItem>{
     /**
      * Postavlje novu vrednost za atribut weight stavke tovara.
      * @param weight - Nova vrednost za atribut weight.
+     * 
+     * @throws NullPointerException - ako se unese null vrednost za weight
+	 * @throws IllegalArgumentException - ako je weight negativan broj
      */
     public void setWeight(BigDecimal weight) {
+    	if(weight == null)
+    		throw new NullPointerException("Masa stavke tovara ne sme biti null.");
+    	
+    	if(weight.intValue() < 0)
+    		throw new IllegalArgumentException("Masa stavke tovara ne sme biti negativan broj.");
+    	
         this.weight = weight;
     }
 
@@ -184,8 +213,17 @@ public class LoadItem implements GenericEntity, Comparable<LoadItem>{
     /**
      * Postavlje novu vrednost za atribut volume stavke tovara.
      * @param volume - Nova vrednost za atribut volume.
+     * 
+     * @throws NullPointerException - ako se unese null vrednost za volume
+	 * @throws IllegalArgumentException - ako je volume negativan broj
      */
     public void setVolume(BigDecimal volume) {
+    	if(volume == null)
+    		throw new NullPointerException("Zapremina stavke tovara ne sme biti null.");
+    	
+    	if(volume.intValue() < 0)
+    		throw new IllegalArgumentException("Zapremina stavke tovara ne sme biti negativan broj.");
+    	
         this.volume = volume;
     }
     
@@ -200,8 +238,13 @@ public class LoadItem implements GenericEntity, Comparable<LoadItem>{
     /**
      * Postavlje novu vrednost za atribut state stavke tovara.
      * @param state - Nova vrednost za atribut state.
+     * 
+     * @throws NullPointerException - ako se unese null vrednost za state
      */
     public void setState(LoadItemState state) {
+    	if(state == null)
+    		throw new NullPointerException("Stanje stavke tovara ne sme biti null.");
+    	
         this.state = state;
     }
     
@@ -216,8 +259,17 @@ public class LoadItem implements GenericEntity, Comparable<LoadItem>{
     /**
      * Postavlje novu vrednost za atribut previousId stavke tovara.
      * @param previousId - Nova vrednost za atribut previousId.
+     * 
+     * @throws NullPointerException - ako se unese null vrednost za prethodnu ID
+	 * @throws IllegalArgumentException - ako se unese prethodna ID vrednost koja je manja od 1
      */
     public void setPreviousId(Long previousId) {
+    	if(previousId == null)
+    		throw new NullPointerException("Prethodna ID vrednost ne sme biti null.");
+    	
+    	if(previousId < 1)
+    		throw new IllegalArgumentException("Prethodna ID vrednost ne sme biti manja od 1.");
+    	
         this.previousId = previousId;
     }
 

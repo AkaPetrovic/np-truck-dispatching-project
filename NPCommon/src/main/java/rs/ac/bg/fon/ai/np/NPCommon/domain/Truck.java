@@ -85,6 +85,12 @@ public class Truck implements GenericEntity{
 
     @Override
     public void setId(Long id) {
+    	if(id == null)
+    		throw new NullPointerException("ID vrednost ne sme biti null.");
+    	
+    	if(id < 1)
+    		throw new IllegalArgumentException("ID vrednost ne sme biti manja od 1.");
+    	
         this.id = id;
     }
 
@@ -99,8 +105,17 @@ public class Truck implements GenericEntity{
     /**
      * Postavlje novu vrednost za atribut model kamiona.
      * @param model - Nova vrednost za atribut model.
+     * 
+     * @throws NullPointerException - ako se unese null vrednost za model
+	 * @throws IllegalArgumentException - ako je model prazan String
      */
     public void setModel(String model) {
+    	if(model == null)
+    		throw new NullPointerException("Naziv modela ne sme biti null.");
+    	
+    	if(model.isEmpty())
+    		throw new IllegalArgumentException("Naziv modela ne sme biti prazan String.");
+    	
         this.model = model;
     }
 
@@ -115,8 +130,13 @@ public class Truck implements GenericEntity{
     /**
      * Postavlje novu vrednost za atribut power kamiona.
      * @param power - Nova vrednost za atribut power.
+     * 
+     * @throws IllegalArgumentException - ako je snaga kamiona negativan broj
      */
     public void setPower(int power) {
+    	if(power < 0)
+    		throw new IllegalArgumentException("Snaga kamiona ne moze biti negativan broj.");
+    	
         this.power = power;
     }
 
@@ -131,8 +151,17 @@ public class Truck implements GenericEntity{
     /**
      * Postavlje novu vrednost za atribut kmTravelled kamiona.
      * @param kmTravelled - Nova vrednost za atribut kmTravelled.
+     * 
+     * @throws NullPointerException - ako se unese null vrednost za kmTravelled
+	 * @throws IllegalArgumentException - ako je kmTravelled negativan broj
      */
     public void setKmTravelled(BigDecimal kmTravelled) {
+    	if(kmTravelled == null)
+    		throw new NullPointerException("Broj predjenih kilometara kamiona ne sme biti null.");
+    	
+    	if(kmTravelled.intValue() < 0)
+    		throw new IllegalArgumentException("Broj predjenih kilometara kamiona ne sme biti negativan broj.");
+    	
         this.kmTravelled = kmTravelled;
     }
 
@@ -147,8 +176,13 @@ public class Truck implements GenericEntity{
     /**
      * Postavlje novu vrednost za atribut year kamiona.
      * @param year - Nova vrednost za atribut year.
+     * 
+     * @throws IllegalArgumentException - ako je year negativan broj
      */
     public void setYear(int year) {
+    	if(year < 0)
+    		throw new IllegalArgumentException("Godina proizvodnje kamiona ne moze biti negativan broj.");
+    	
         this.year = year;
     }
 
@@ -163,8 +197,17 @@ public class Truck implements GenericEntity{
     /**
      * Postavlje novu vrednost za atribut carryingCapacity kamiona.
      * @param carryingCapacity - Nova vrednost za atribut carryingCapacity.
+     * 
+     * @throws NullPointerException - ako se unese null vrednost za carryingCapacity
+	 * @throws IllegalArgumentException - ako je carryingCapacity negativan broj
      */
     public void setCarryingCapacity(BigDecimal carryingCapacity) {
+    	if(carryingCapacity == null)
+    		throw new NullPointerException("Nosivost kamiona ne sme biti null.");
+    	
+    	if(carryingCapacity.intValue() < 0)
+    		throw new IllegalArgumentException("Nosivost kamiona ne sme biti negativan broj.");
+    	
         this.carryingCapacity = carryingCapacity;
     }
     
@@ -179,8 +222,13 @@ public class Truck implements GenericEntity{
     /**
      * Postavlje novu vrednost za atribut manufacturer kamiona.
      * @param manufacturer - Nova vrednost za atribut manufacturer.
+     * 
+     * @throws NullPointerException - ako se unese null vrednost za manufacturer
      */
     public void setManufacturer(Manufacturer manufacturer) {
+    	if(manufacturer == null)
+    		throw new NullPointerException("Proizvodjac kamiona ne sme biti null.");
+    	
         this.manufacturer = manufacturer;
     }
 
@@ -195,8 +243,13 @@ public class Truck implements GenericEntity{
     /**
      * Postavlje novu vrednost za atribut truckType kamiona.
      * @param truckType - Nova vrednost za atribut truckType.
+     * 
+     * @throws NullPointerException - ako se unese null vrednost za truckType
      */
     public void setTruckType(TruckType truckType) {
+    	if(truckType == null)
+    		throw new NullPointerException("Tip kamiona ne sme biti null.");
+    	
         this.truckType = truckType;
     }
 

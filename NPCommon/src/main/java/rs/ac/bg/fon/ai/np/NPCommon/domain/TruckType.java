@@ -47,6 +47,12 @@ public class TruckType implements GenericEntity{
     
     @Override
     public void setId(Long id) {
+    	if(id == null)
+    		throw new NullPointerException("ID vrednost ne sme biti null.");
+    	
+    	if(id < 1)
+    		throw new IllegalArgumentException("ID vrednost ne sme biti manja od 1.");
+    	
         this.id = id;
     }
     
@@ -61,8 +67,17 @@ public class TruckType implements GenericEntity{
     /**
      * Postavlje novu vrednost za atribut name tipa kamiona.
      * @param name - Nova vrednost za atribut name.
+     * 
+     * @throws NullPointerException - ako se unese null vrednost za name
+	 * @throws IllegalArgumentException - ako je name prazan String
      */
     public void setName(String name) {
+    	if(name == null)
+    		throw new NullPointerException("Ime tipa kamiona ne sme biti null.");
+    	
+    	if(name.isEmpty())
+    		throw new IllegalArgumentException("Ime tipa kamiona ne sme biti prazan String.");
+    	
         this.name = name;
     }
 

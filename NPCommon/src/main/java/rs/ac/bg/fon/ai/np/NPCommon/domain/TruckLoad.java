@@ -91,6 +91,12 @@ public class TruckLoad implements GenericEntity{
 
     @Override
     public void setId(Long id) {
+    	if(id == null)
+    		throw new NullPointerException("ID vrednost ne sme biti null.");
+    	
+    	if(id < 1)
+    		throw new IllegalArgumentException("ID vrednost ne sme biti manja od 1.");
+    	
         this.id = id;
     }
 
@@ -105,8 +111,13 @@ public class TruckLoad implements GenericEntity{
     /**
      * Postavlje novu vrednost za atribut startDate tovara.
      * @param startDate - Nova vrednost za atribut startDate.
+     * 
+     * @throws NullPointerException - ako se unese null vrednost za startDate
      */
     public void setStartDate(Date startDate) {
+    	if(startDate == null)
+    		throw new NullPointerException("Datum polaska ne sme biti null.");
+    	
         this.startDate = startDate;
     }
 
@@ -121,8 +132,13 @@ public class TruckLoad implements GenericEntity{
     /**
      * Postavlje novu vrednost za atribut endDate tovara.
      * @param endDate - Nova vrednost za atribut endDate.
+     * 
+     * @throws NullPointerException - ako se unese null vrednost za endDate
      */
     public void setEndDate(Date endDate) {
+    	if(endDate == null)
+    		throw new NullPointerException("Datum dolaska ne sme biti null.");
+    	
         this.endDate = endDate;
     }
 
@@ -137,8 +153,13 @@ public class TruckLoad implements GenericEntity{
     /**
      * Postavlje novu vrednost za atribut startTime tovara.
      * @param startTime - Nova vrednost za atribut startTime.
+     * 
+     * @throws NullPointerException - ako se unese null vrednost za startTime
      */
     public void setStartTime(LocalTime startTime) {
+    	if(startTime == null)
+    		throw new NullPointerException("Vreme polaska ne sme biti null.");
+    	
         this.startTime = startTime;
     }
 
@@ -153,8 +174,13 @@ public class TruckLoad implements GenericEntity{
     /**
      * Postavlje novu vrednost za atribut endTime tovara.
      * @param endTime - Nova vrednost za atribut endTime.
+     * 
+     * @throws NullPointerException - ako se unese null vrednost za endTime
      */
     public void setEndTime(LocalTime endTime) {
+    	if(endTime == null)
+    		throw new NullPointerException("Vreme dolaska ne sme biti null.");
+    	
         this.endTime = endTime;
     }
 
@@ -169,8 +195,17 @@ public class TruckLoad implements GenericEntity{
     /**
      * Postavlje novu vrednost za atribut incomePerKilometer tovara.
      * @param incomePerKilometer - Nova vrednost za atribut incomePerKilometer.
+     * 
+     * @throws NullPointerException - ako se unese null vrednost za incomePerKilometer
+	 * @throws IllegalArgumentException - ako je incomePerKilometer negativan broj
      */
     public void setIncomePerKilometer(BigDecimal incomePerKilometer) {
+    	if(incomePerKilometer == null)
+    		throw new NullPointerException("Prihod po predjenom kilometru ne sme biti null.");
+    	
+    	if(incomePerKilometer.intValue() < 0)
+    		throw new IllegalArgumentException("Prihod po predjenom kilometru ne sme biti negativan broj.");
+    	
         this.incomePerKilometer = incomePerKilometer;
     }
 
@@ -185,8 +220,13 @@ public class TruckLoad implements GenericEntity{
     /**
      * Postavlje novu vrednost za atribut driver tovara.
      * @param driver - Nova vrednost za atribut driver.
+     * 
+     * @throws NullPointerException - ako se unese null vrednost za driver
      */
     public void setDriver(Driver driver) {
+    	if(driver == null)
+    		throw new NullPointerException("Vozac ne sme biti null.");
+    	
         this.driver = driver;
     }
 
@@ -201,8 +241,13 @@ public class TruckLoad implements GenericEntity{
     /**
      * Postavlje novu vrednost za atribut loadItems tovara.
      * @param loadItems - Nova vrednost za atribut loadItems.
+     * 
+     * @throws NullPointerException - ako se unese null vrednost za loadItems
      */
     public void setLoadItems(List<LoadItem> loadItems) {
+    	if(loadItems == null)
+    		throw new NullPointerException("Lista stavki tovara ne sme biti null.");
+    	
         this.loadItems = loadItems;
     }
 

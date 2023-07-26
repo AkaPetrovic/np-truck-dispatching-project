@@ -62,6 +62,12 @@ public class TruckMaintenance implements GenericEntity {
     
     @Override
     public void setId(Long id) {
+    	if(id == null)
+    		throw new NullPointerException("ID vrednost ne sme biti null.");
+    	
+    	if(id < 1)
+    		throw new IllegalArgumentException("ID vrednost ne sme biti manja od 1.");
+    	
         this.id = id;
     }
     
@@ -76,8 +82,13 @@ public class TruckMaintenance implements GenericEntity {
     /**
      * Postavlje novu vrednost za atribut dateOfService servisa.
      * @param dateOfService - Nova vrednost za atribut dateOfService.
+     * 
+     * @throws NullPointerException - ako se unese null vrednost za dateOfService
      */
     public void setDateOfService(Date dateOfService) {
+    	if(dateOfService == null)
+    		throw new NullPointerException("Datum servisa kamiona ne sme biti null.");
+    	
         this.dateOfService = dateOfService;
     }
 
@@ -92,8 +103,17 @@ public class TruckMaintenance implements GenericEntity {
     /**
      * Postavlje novu vrednost za atribut kmAtService servisa.
      * @param kmAtService - Nova vrednost za atribut kmAtService.
+     * 
+     * @throws NullPointerException - ako se unese null vrednost za incomePerKilometer
+	 * @throws IllegalArgumentException - ako je incomePerKilometer negativan broj
      */
     public void setKmAtService(BigDecimal kmAtService) {
+    	if(kmAtService == null)
+    		throw new NullPointerException("Broj predjenih kilometara kamiona u trenutku servisa ne sme biti null.");
+    	
+    	if(kmAtService.intValue() < 0)
+    		throw new IllegalArgumentException("Broj predjenih kilometara kamiona u trenutku servisa ne sme biti negativan broj.");
+    	
         this.kmAtService = kmAtService;
     }
 
@@ -108,8 +128,13 @@ public class TruckMaintenance implements GenericEntity {
     /**
      * Postavlje novu vrednost za atribut truck servisa.
      * @param truck - Nova vrednost za atribut truck.
+     * 
+     * @throws NullPointerException - ako se unese null vrednost za truck
      */
     public void setTruck(Truck truck) {
+    	if(truck == null)
+    		throw new NullPointerException("Kamion ne sme biti null.");
+    	
         this.truck = truck;
     }
 

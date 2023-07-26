@@ -72,6 +72,12 @@ public class User implements GenericEntity {
     }
     
     public void setId(Long id) {
+    	if(id == null)
+    		throw new NullPointerException("ID vrednost ne sme biti null.");
+    	
+    	if(id < 1)
+    		throw new IllegalArgumentException("ID vrednost ne sme biti manja od 1.");
+    	
         this.id = id;
     }
 
@@ -86,8 +92,17 @@ public class User implements GenericEntity {
     /**
      * Postavlje novu vrednost za atribut firstname korisnika.
      * @param firstname - Nova vrednost za atribut ime.
+     * 
+     * @throws NullPointerException - ako se unese null vrednost za firstname
+	 * @throws IllegalArgumentException - ako je firstname prazan String
      */
     public void setFirstname(String firstname) {
+    	if(firstname == null)
+    		throw new NullPointerException("Ime korisnika ne sme biti null.");
+    	
+    	if(firstname.isEmpty())
+    		throw new IllegalArgumentException("Ime korisnika ne sme biti prazan String.");
+    	
         this.firstname = firstname;
     }
 
@@ -102,8 +117,17 @@ public class User implements GenericEntity {
     /**
      * Postavlje novu vrednost za atribut lastname korisnika.
      * @param lastname - Nova vrednost za atribut lastname.
+     * 
+     * @throws NullPointerException - ako se unese null vrednost za lastname
+	 * @throws IllegalArgumentException - ako je lastname prazan String
      */
     public void setLastname(String lastname) {
+    	if(lastname == null)
+    		throw new NullPointerException("Prezime korisnika ne sme biti null.");
+    	
+    	if(lastname.isEmpty())
+    		throw new IllegalArgumentException("Prezime korisnika ne sme biti prazan String.");
+    	
         this.lastname = lastname;
     }
 
@@ -118,8 +142,17 @@ public class User implements GenericEntity {
     /**
      * Postavlje novu vrednost za atribut username korisnika.
      * @param username - Nova vrednost za atribut username.
+     * 
+     * @throws NullPointerException - ako se unese null vrednost za username
+	 * @throws IllegalArgumentException - ako je username prazan String
      */
     public void setUsername(String username) {
+    	if(lastname == null)
+    		throw new NullPointerException("Korisnicko ime ne sme biti null.");
+    	
+    	if(lastname.isEmpty())
+    		throw new IllegalArgumentException("Korisnicko ime ne sme biti prazan String.");
+    	
         this.username = username;
     }
 
@@ -134,8 +167,17 @@ public class User implements GenericEntity {
     /**
      * Postavlje novu vrednost za atribut password korisnika.
      * @param password - Nova vrednost za atribut password.
+     * 
+     * @throws NullPointerException - ako se unese null vrednost za password
+	 * @throws IllegalArgumentException - ako je password prazan String
      */
     public void setPassword(String password) {
+    	if(password == null)
+    		throw new NullPointerException("Lozinka ne sme biti null.");
+    	
+    	if(password.isEmpty())
+    		throw new IllegalArgumentException("Lozinka ne sme biti prazan String.");
+    	
         this.password = password;
     }
 
@@ -150,8 +192,20 @@ public class User implements GenericEntity {
     /**
      * Postavlje novu vrednost za atribut role korisnika.
      * @param role - Nova vrednost za atribut role. Predvidjene dozvoljene vrednosti su "manager" i "dispatcher".
+     * 
+     * @throws NullPointerException - ako se unese null vrednost za role
+	 * @throws IllegalArgumentException - ako je role prazan String ili ukoliko role nije ni "manager" ni "dispatcher"
      */
     public void setRole(String role) {
+    	if(role == null)
+    		throw new NullPointerException("Uloga korisnika ne sme biti null.");
+    	
+    	if(role.isEmpty())
+    		throw new IllegalArgumentException("Uloga korisnika ne sme biti prazan String.");
+    	
+    	if(!role.toLowerCase().equals("manager") && !role.toLowerCase().equals("dispatcher"))
+    		throw new IllegalArgumentException("Uloga korisnika moze biti samo dispatcher ili manager.");
+    	
         this.role = role;
     }
 
