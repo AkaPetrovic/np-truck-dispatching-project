@@ -29,9 +29,29 @@ public class ManufacturerTest {
 	}
 	
 	@Test
+	void testSetIdNull() {
+		assertThrows(NullPointerException.class, () -> m.setId(null));
+	}
+	
+	@Test
+	void testSetIdLessThan1() {
+		assertThrows(IllegalArgumentException.class, () -> m.setId(0L));
+	}
+	
+	@Test
 	void testSetName() {
 		m.setName("Scania");
 		assertEquals("Scania", m.getName());
+	}
+	
+	@Test
+	void testSetNameNull() {
+		assertThrows(NullPointerException.class, () -> m.setName(null));
+	}
+	
+	@Test
+	void testSetNameEmptyString() {
+		assertThrows(IllegalArgumentException.class, () -> m.setName(""));
 	}
 	
 	@Test
@@ -40,6 +60,11 @@ public class ManufacturerTest {
 		
 		m.setCountry(manufacturerCountry);
 		assertEquals(manufacturerCountry, m.getCountry());
+	}
+	
+	@Test
+	void testSetCountryNull() {
+		assertThrows(NullPointerException.class, () -> m.setCountry(null));
 	}
 	
 	@Test

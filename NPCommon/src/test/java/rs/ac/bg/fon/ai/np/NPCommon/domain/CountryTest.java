@@ -27,11 +27,31 @@ public class CountryTest {
 		c.setId(5L);
 		assertEquals(5, c.getId());
 	}
+	
+	@Test
+	void testSetIdNull() {
+		assertThrows(NullPointerException.class, () -> c.setId(null));
+	}
+	
+	@Test
+	void testSetIdLessThan1() {
+		assertThrows(IllegalArgumentException.class, () -> c.setId(0L));
+	}
 
 	@Test
 	void testSetName() {
 		c.setName("Serbia");
 		assertEquals("Serbia", c.getName());
+	}
+	
+	@Test
+	void testSetNameNull() {
+		assertThrows(NullPointerException.class, () -> c.setName(null));
+	}
+	
+	@Test
+	void testSetNameEmptyString() {
+		assertThrows(IllegalArgumentException.class, () -> c.setName(""));
 	}
 	
 	@Test

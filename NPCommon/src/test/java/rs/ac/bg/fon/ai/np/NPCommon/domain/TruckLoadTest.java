@@ -38,6 +38,16 @@ public class TruckLoadTest {
 	}
 	
 	@Test
+	void testSetIdNull() {
+		assertThrows(NullPointerException.class, () -> tl.setId(null));
+	}
+	
+	@Test
+	void testSetIdLessThan1() {
+		assertThrows(IllegalArgumentException.class, () -> tl.setId(0L));
+	}
+	
+	@Test
 	void testSetStartDate() {
 		Calendar calendar = Calendar.getInstance();
 		
@@ -46,6 +56,11 @@ public class TruckLoadTest {
 		
 		tl.setStartDate(startDate);
 		assertEquals(startDate, tl.getStartDate());
+	}
+	
+	@Test
+	void testSetStartDateNull() {
+		assertThrows(NullPointerException.class, () -> tl.setStartDate(null));
 	}
 	
 	@Test
@@ -60,12 +75,22 @@ public class TruckLoadTest {
 	}
 	
 	@Test
+	void testEndDateNull() {
+		assertThrows(NullPointerException.class, () -> tl.setEndDate(null));
+	}
+	
+	@Test
 	void testSetStartTime() {
 		LocalTime startTime = LocalTime.of(10, 30);
 		
 		tl.setStartTime(startTime);
 		
 		assertEquals(startTime, tl.getStartTime());
+	}
+	
+	@Test
+	void testStartTimeNull() {
+		assertThrows(NullPointerException.class, () -> tl.setStartTime(null));
 	}
 	
 	@Test
@@ -78,10 +103,25 @@ public class TruckLoadTest {
 	}
 	
 	@Test
-	void testSetIncomePerKilometerTime() {
+	void testEndTimeNull() {
+		assertThrows(NullPointerException.class, () -> tl.setEndTime(null));
+	}
+	
+	@Test
+	void testSetIncomePerKilometer() {
 		tl.setIncomePerKilometer(new BigDecimal(2.54));
 		
 		assertEquals(new BigDecimal(2.54), tl.getIncomePerKilometer());
+	}
+	
+	@Test
+	void testSetIncomePerKilometerNull() {
+		assertThrows(NullPointerException.class, () -> tl.setIncomePerKilometer(null));
+	}
+	
+	@Test
+	void testSetIncomePerKilometerNegativeNumber() {
+		assertThrows(IllegalArgumentException.class, () -> tl.setIncomePerKilometer(new BigDecimal(-1)));
 	}
 	
 	@Test
@@ -109,6 +149,11 @@ public class TruckLoadTest {
 	}
 	
 	@Test
+	void testSetDriverNull() {
+		assertThrows(NullPointerException.class, () -> tl.setDriver(null));
+	}
+	
+	@Test
 	void testSetLoadItems() {
 		List<LoadItem> loadItems = new ArrayList<>();
 		LoadItem li1 = new LoadItem(1L, tl, "Chair", false, true, new BigDecimal(12.5), new BigDecimal(0.62), LoadItemState.UNCHANGED);
@@ -121,6 +166,11 @@ public class TruckLoadTest {
 		tl.getLoadItems().add(li2);
 		
 		assertEquals(loadItems, tl.getLoadItems());
+	}
+	
+	@Test
+	void testSetLoadItemsNull() {
+		assertThrows(NullPointerException.class, () -> tl.setLoadItems(null));
 	}
 	
 	@Test

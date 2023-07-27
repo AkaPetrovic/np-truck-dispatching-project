@@ -147,10 +147,10 @@ public class User implements GenericEntity {
 	 * @throws IllegalArgumentException - ako je username prazan String
      */
     public void setUsername(String username) {
-    	if(lastname == null)
+    	if(username == null)
     		throw new NullPointerException("Korisnicko ime ne sme biti null.");
     	
-    	if(lastname.isEmpty())
+    	if(username.isEmpty())
     		throw new IllegalArgumentException("Korisnicko ime ne sme biti prazan String.");
     	
         this.username = username;

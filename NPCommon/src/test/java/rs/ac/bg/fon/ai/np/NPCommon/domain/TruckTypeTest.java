@@ -29,9 +29,29 @@ public class TruckTypeTest {
 	}
 	
 	@Test
+	void testSetIdNull() {
+		assertThrows(NullPointerException.class, () -> tt.setId(null));
+	}
+	
+	@Test
+	void testSetIdLessThan1() {
+		assertThrows(IllegalArgumentException.class, () -> tt.setId(0L));
+	}
+	
+	@Test
 	void testSetName() {
 		tt.setName("Type");
 		assertEquals("Type", tt.getName());
+	}
+	
+	@Test
+	void testSetNameNull() {
+		assertThrows(NullPointerException.class, () -> tt.setName(null));
+	}
+	
+	@Test
+	void testSetNameEmptyString() {
+		assertThrows(IllegalArgumentException.class, () -> tt.setName(""));
 	}
 	
 	@Test

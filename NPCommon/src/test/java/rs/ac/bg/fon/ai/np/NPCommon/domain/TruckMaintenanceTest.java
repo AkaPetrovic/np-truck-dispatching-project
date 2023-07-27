@@ -33,6 +33,16 @@ public class TruckMaintenanceTest {
 	}
 	
 	@Test
+	void testSetIdNull() {
+		assertThrows(NullPointerException.class, () -> tm.setId(null));
+	}
+	
+	@Test
+	void testSetIdLessThan1() {
+		assertThrows(IllegalArgumentException.class, () -> tm.setId(0L));
+	}
+	
+	@Test
 	void testSetDateOfService() {
 		Calendar calendar = Calendar.getInstance();
 		
@@ -44,9 +54,24 @@ public class TruckMaintenanceTest {
 	}
 	
 	@Test
+	void testSetDateOfServiceNull() {
+		assertThrows(NullPointerException.class, () -> tm.setDateOfService(null));
+	}
+	
+	@Test
 	void testSetKmAtService() {
 		tm.setKmAtService(new BigDecimal(134532.23));
 		assertEquals(new BigDecimal(134532.23), tm.getKmAtService());
+	}
+	
+	@Test
+	void testSetKmAtServiceNull() {
+		assertThrows(NullPointerException.class, () -> tm.setKmAtService(null));
+	}
+	
+	@Test
+	void testSetKmAtServiceNegativeNumber() {
+		assertThrows(IllegalArgumentException.class, () -> tm.setKmAtService(new BigDecimal(-1)));
 	}
 	
 	@Test
@@ -63,6 +88,11 @@ public class TruckMaintenanceTest {
 		
 		
 		assertEquals(truck, tm.getTruck());
+	}
+	
+	@Test
+	void testSetTruckNull() {
+		assertThrows(NullPointerException.class, () -> tm.setTruck(null));
 	}
 	
 	@Test
