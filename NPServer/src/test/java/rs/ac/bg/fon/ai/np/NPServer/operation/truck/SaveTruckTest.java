@@ -5,7 +5,6 @@ import static org.junit.jupiter.api.Assertions.*;
 import java.math.BigDecimal;
 import java.util.List;
 
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 import rs.ac.bg.fon.ai.np.NPCommon.domain.Country;
@@ -15,8 +14,7 @@ import rs.ac.bg.fon.ai.np.NPCommon.domain.TruckType;
 import rs.ac.bg.fon.ai.np.NPServer.controller.Controller;
 
 public class SaveTruckTest {
-	
-	@Disabled
+
 	@Test
 	void testExecuteOperation() throws Exception {
 		Country truckManufacturerCountryOfOrigin = new Country(1L, "Sweden");
