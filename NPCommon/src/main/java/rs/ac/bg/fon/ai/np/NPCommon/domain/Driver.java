@@ -50,11 +50,11 @@ public class Driver implements GenericEntity{
      * @param truck - Kamion klase Truck koji se vezuje za vozaca prilikom kreiranja instance vozaca.
      */
     public Driver(Long id, String name, String surname, Date birthday, Truck truck) {
-        this.id = id;
-        this.name = name;
-        this.surname = surname;
-        this.birthday = birthday;
-        this.truck = truck;
+        setId(id);
+        setName(name);
+        setSurname(surname);
+        setBirthday(birthday);
+        setTruck(truck);
     }
 
     /**
@@ -66,6 +66,12 @@ public class Driver implements GenericEntity{
     }
 
     public void setId(Long id) {
+    	if(id == null)
+    		throw new NullPointerException("ID vrednost ne sme biti null.");
+    	
+    	if(id < 1)
+    		throw new IllegalArgumentException("ID vrednost ne sme biti manja od 1.");
+    	
         this.id = id;
     }
     
@@ -80,8 +86,17 @@ public class Driver implements GenericEntity{
     /**
      * Postavlje novu vrednost za atribut name vozaca.
      * @param name - Nova vrednost za atribut name.
+     * 
+     * @throws NullPointerException - ako se unese null vrednost za name
+	 * @throws IllegalArgumentException - ako je name prazan String
      */
     public void setName(String name) {
+    	if(name == null)
+    		throw new NullPointerException("Ime ne sme biti null.");
+    	
+    	if(name.isEmpty())
+    		throw new IllegalArgumentException("Ime ne sme biti prazan String.");
+    	
         this.name = name;
     }
 
@@ -96,8 +111,17 @@ public class Driver implements GenericEntity{
     /**
      * Postavlje novu vrednost za atribut surname vozaca.
      * @param surname - Nova vrednost za atribut surname.
+     * 
+     * @throws NullPointerException - ako se unese null vrednost za surname
+	 * @throws IllegalArgumentException - ako je surname prazan String
      */
     public void setSurname(String surname) {
+    	if(surname == null)
+    		throw new NullPointerException("Prezime ne sme biti null.");
+    	
+    	if(surname.isEmpty())
+    		throw new IllegalArgumentException("Prezime ne sme biti prazan String.");
+    	
         this.surname = surname;
     }
 
@@ -112,8 +136,13 @@ public class Driver implements GenericEntity{
     /**
      * Postavlje novu vrednost za atribut birthday vozaca.
      * @param birthday - Nova vrednost za atribut birthday.
+     * 
+     * @throws NullPointerException - ako se unese null vrednost za birthday
      */
     public void setBirthday(Date birthday) {
+    	if(birthday == null)
+    		throw new NullPointerException("Datum rodjenja ne sme biti null.");
+    	
         this.birthday = birthday;
     }
 
@@ -128,8 +157,13 @@ public class Driver implements GenericEntity{
     /**
      * Postavlje novu vrednost za atribut truck vozaca.
      * @param truck - Nova vrednost za atribut truck.
+     * 
+     * @throws NullPointerException - ako se unese null vrednost za truck
      */
     public void setTruck(Truck truck) {
+    	if(truck == null)
+    		throw new NullPointerException("Kamion ne sme biti null.");
+    	
         this.truck = truck;
     }
 

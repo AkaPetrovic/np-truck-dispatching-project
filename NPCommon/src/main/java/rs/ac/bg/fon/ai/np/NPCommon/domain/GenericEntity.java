@@ -64,6 +64,9 @@ public interface GenericEntity extends Serializable {
     /**
      * Postavlja novu vrednost id atributu odgovarajuceg entiteta.
      * @param id - Nova ID vrednost nekog entiteta koja se dodaje id atributu u vidu Long vrednosti (ceo broj).
+     * 
+     * @throws NullPointerException - ako se unese null vrednost za ID
+	 * @throws IllegalArgumentException - ako se ID vrednost koja je manja od 1
      */
     void setId(Long id);
 }
