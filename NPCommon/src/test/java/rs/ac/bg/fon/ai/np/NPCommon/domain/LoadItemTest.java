@@ -36,6 +36,16 @@ public class LoadItemTest {
 	}
 	
 	@Test
+	void testSetIdNull() {
+		assertThrows(NullPointerException.class, () -> li.setId(null));
+	}
+	
+	@Test
+	void testSetIdLessThan1() {
+		assertThrows(IllegalArgumentException.class, () -> li.setId(0L));
+	}
+	
+	@Test
 	void testSetTruckLoad() {
 		Calendar calendar = Calendar.getInstance();
 		
@@ -71,11 +81,26 @@ public class LoadItemTest {
 		li.setLoad(load);
 		assertEquals(load, li.getLoad());
 	}
+	
+	@Test
+	void testSetTruckLoadNull() {
+		assertThrows(NullPointerException.class, () -> li.setLoad(null));
+	}
 
 	@Test
 	void testSetLoadItemName() {
 		li.setLoadItemName("Chair");
 		assertEquals("Chair", li.getLoadItemName());
+	}
+	
+	@Test
+	void testSetLoadItemNameNull() {
+		assertThrows(NullPointerException.class, () -> li.setLoadItemName(null));
+	}
+	
+	@Test
+	void testSetLoadItemNameEmptyString() {
+		assertThrows(IllegalArgumentException.class, () -> li.setLoadItemName(""));
 	}
 	
 	@Test
@@ -97,9 +122,29 @@ public class LoadItemTest {
 	}
 	
 	@Test
+	void testSetWeightNull() {
+		assertThrows(NullPointerException.class, () -> li.setWeight(null));
+	}
+	
+	@Test
+	void testSetWeightNegativeNumber() {
+		assertThrows(IllegalArgumentException.class, () -> li.setWeight(new BigDecimal(-1)));
+	}
+	
+	@Test
 	void testSetVolume() {
 		li.setVolume(new BigDecimal(3.5));
 		assertEquals(new BigDecimal(3.5), li.getVolume());
+	}
+	
+	@Test
+	void testSetVolumeNull() {
+		assertThrows(NullPointerException.class, () -> li.setVolume(null));
+	}
+	
+	@Test
+	void testSetVolumeNegativeNumber() {
+		assertThrows(IllegalArgumentException.class, () -> li.setVolume(new BigDecimal(-1)));
 	}
 	
 	@Test
@@ -109,9 +154,24 @@ public class LoadItemTest {
 	}
 	
 	@Test
+	void testSetLoadItemStateNull() {
+		assertThrows(NullPointerException.class, () -> li.setState(null));
+	}
+	
+	@Test
 	void testSetPreviousId() {
 		li.setPreviousId(3L);
 		assertEquals(3L, li.getPreviousId());
+	}
+	
+	@Test
+	void testSetPreviousIdNull() {
+		assertThrows(NullPointerException.class, () -> li.setPreviousId(null));
+	}
+	
+	@Test
+	void testSetPreviousIdLessThan1() {
+		assertThrows(IllegalArgumentException.class, () -> li.setPreviousId(0L));
 	}
 	
 	@Test

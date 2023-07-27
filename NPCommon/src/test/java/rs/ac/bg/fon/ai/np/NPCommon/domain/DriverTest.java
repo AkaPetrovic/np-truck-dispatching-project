@@ -33,15 +33,45 @@ public class DriverTest {
 	}
 	
 	@Test
+	void testSetIdNull() {
+		assertThrows(NullPointerException.class, () -> d.setId(null));
+	}
+	
+	@Test
+	void testSetIdLessThan1() {
+		assertThrows(IllegalArgumentException.class, () -> d.setId(0L));
+	}
+	
+	@Test
 	void testSetName() {
 		d.setName("Name");
 		assertEquals("Name", d.getName());
 	}
 	
 	@Test
+	void testSetNameNull() {
+		assertThrows(NullPointerException.class, () -> d.setName(null));
+	}
+	
+	@Test
+	void testSetNameEmptyString() {
+		assertThrows(IllegalArgumentException.class, () -> d.setName(""));
+	}
+	
+	@Test
 	void testSetSurname() {
 		d.setSurname("Surname");
 		assertEquals("Surname", d.getSurname());
+	}
+	
+	@Test
+	void testSetSurnameNull() {
+		assertThrows(NullPointerException.class, () -> d.setSurname(null));
+	}
+	
+	@Test
+	void testSetSurnameEmptyString() {
+		assertThrows(IllegalArgumentException.class, () -> d.setSurname(""));
 	}
 	
 	@Test
@@ -57,6 +87,11 @@ public class DriverTest {
 		d.setBirthday(birthday);
 		
 		assertEquals(birthday, d.getBirthday());
+	}
+	
+	@Test
+	void testSetBirthdayNull() {
+		assertThrows(NullPointerException.class, () -> d.setBirthday(null));
 	}
 	
 	@Test
@@ -76,6 +111,11 @@ public class DriverTest {
 		
 		d.setTruck(truck);
 		assertEquals(truck, d.getTruck());
+	}
+	
+	@Test
+	void testSetTruckNull() {
+		assertThrows(NullPointerException.class, () -> d.setTruck(null));
 	}
 	
 	@Test

@@ -8,7 +8,6 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 import rs.ac.bg.fon.ai.np.NPCommon.domain.Country;
@@ -22,8 +21,7 @@ import rs.ac.bg.fon.ai.np.NPCommon.domain.util.LoadItemState;
 import rs.ac.bg.fon.ai.np.NPServer.controller.Controller;
 
 public class SaveLoadTest {
-	
-	@Disabled
+
 	@Test
 	void testExecuteOperation() throws Exception {
 		Calendar calendar = Calendar.getInstance();

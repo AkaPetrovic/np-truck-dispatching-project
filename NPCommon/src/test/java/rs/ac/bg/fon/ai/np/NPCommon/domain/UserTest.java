@@ -29,9 +29,29 @@ public class UserTest {
 	}
 	
 	@Test
+	void testSetIdNull() {
+		assertThrows(NullPointerException.class, () -> u.setId(null));
+	}
+	
+	@Test
+	void testSetIdLessThan1() {
+		assertThrows(IllegalArgumentException.class, () -> u.setId(0L));
+	}
+	
+	@Test
 	void testSetFirstname() {
 		u.setFirstname("Firstname");
 		assertEquals("Firstname", u.getFirstname());
+	}
+	
+	@Test
+	void testSetFirstnameNull() {
+		assertThrows(NullPointerException.class, () -> u.setFirstname(null));
+	}
+	
+	@Test
+	void testSetFirstnameEmptyString() {
+		assertThrows(IllegalArgumentException.class, () -> u.setFirstname(""));
 	}
 	
 	@Test
@@ -41,9 +61,29 @@ public class UserTest {
 	}
 	
 	@Test
+	void testSetLastnameNull() {
+		assertThrows(NullPointerException.class, () -> u.setLastname(null));
+	}
+	
+	@Test
+	void testSetLastnameEmptyString() {
+		assertThrows(IllegalArgumentException.class, () -> u.setLastname(""));
+	}
+	
+	@Test
 	void testSetUsername() {
 		u.setUsername("Username");
 		assertEquals("Username", u.getUsername());
+	}
+	
+	@Test
+	void testSetUsernameNull() {
+		assertThrows(NullPointerException.class, () -> u.setUsername(null));
+	}
+	
+	@Test
+	void testSetUsernameEmptyString() {
+		assertThrows(IllegalArgumentException.class, () -> u.setUsername(""));
 	}
 	
 	@Test
@@ -53,9 +93,38 @@ public class UserTest {
 	}
 	
 	@Test
+	void testSetPasswordNull() {
+		assertThrows(NullPointerException.class, () -> u.setPassword(null));
+	}
+	
+	@Test
+	void testSetPasswordEmptyString() {
+		assertThrows(IllegalArgumentException.class, () -> u.setPassword(""));
+	}
+	
+	@Test
 	void testSetRole() {
 		u.setRole("Manager");
 		assertEquals("Manager", u.getRole());
+	}
+	
+	@Test
+	void testSetRoleNull() {
+		assertThrows(NullPointerException.class, () -> u.setRole(null));
+	}
+	
+	@Test
+	void testSetRoleEmptyString() {
+		Exception e = assertThrows(IllegalArgumentException.class, () -> u.setRole(""));
+		
+		assertEquals("Uloga korisnika ne sme biti prazan String.", e.getMessage());
+	}
+	
+	@Test
+	void testSetRoleNotManagerNotDispatcher() {
+		Exception e = assertThrows(IllegalArgumentException.class, () -> u.setRole("role"));
+		
+		assertEquals("Uloga korisnika moze biti samo dispatcher ili manager.", e.getMessage());
 	}
 	
 	@Test

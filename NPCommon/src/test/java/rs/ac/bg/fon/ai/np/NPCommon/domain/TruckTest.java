@@ -31,9 +31,29 @@ public class TruckTest {
 	}
 	
 	@Test
+	void testSetIdNull() {
+		assertThrows(NullPointerException.class, () -> t.setId(null));
+	}
+	
+	@Test
+	void testSetIdLessThan1() {
+		assertThrows(IllegalArgumentException.class, () -> t.setId(0L));
+	}
+	
+	@Test
 	void testSetModel() {
 		t.setModel("560R");
 		assertEquals("560R", t.getModel());
+	}
+	
+	@Test
+	void testSetModelNull() {
+		assertThrows(NullPointerException.class, () -> t.setModel(null));
+	}
+	
+	@Test
+	void testSetModelEmptyString() {
+		assertThrows(IllegalArgumentException.class, () -> t.setModel(""));
 	}
 	
 	@Test
@@ -43,9 +63,24 @@ public class TruckTest {
 	}
 	
 	@Test
+	void testSetPowerNegativeNumber() {
+		assertThrows(IllegalArgumentException.class, () -> t.setPower(-1));
+	}
+	
+	@Test
 	void testSetKmTravelled() {
 		t.setKmTravelled(new BigDecimal(132120.54));
 		assertEquals(new BigDecimal(132120.54), t.getKmTravelled());
+	}
+	
+	@Test
+	void testSetKmTravelledNull() {
+		assertThrows(NullPointerException.class, () -> t.setKmTravelled(null));
+	}
+	
+	@Test
+	void testSetKmTravelledNegativeNumber() {
+		assertThrows(IllegalArgumentException.class, () -> t.setKmTravelled(new BigDecimal(-1)));
 	}
 	
 	@Test
@@ -53,11 +88,26 @@ public class TruckTest {
 		t.setYear(2002);
 		assertEquals(2002, t.getYear());
 	}
+	
+	@Test
+	void testSetYearNegativeNumber() {
+		assertThrows(IllegalArgumentException.class, () -> t.setYear(-1));
+	}
 
 	@Test
 	void testSetCarryingCapacity() {
 		t.setCarryingCapacity(new BigDecimal(60.5));
 		assertEquals(new BigDecimal(60.5), t.getCarryingCapacity());
+	}
+	
+	@Test
+	void testSetCarryingCapacityNull() {
+		assertThrows(NullPointerException.class, () -> t.setCarryingCapacity(null));
+	}
+	
+	@Test
+	void testSetCarryingCapacityNegativeNumber() {
+		assertThrows(IllegalArgumentException.class, () -> t.setCarryingCapacity(new BigDecimal(-1)));
 	}
 	
 	@Test
@@ -71,12 +121,22 @@ public class TruckTest {
 	}
 	
 	@Test
+	void testSetManufacturerNull() {
+		assertThrows(NullPointerException.class, () -> t.setManufacturer(null));
+	}
+	
+	@Test
 	void testSetTruckType() {
 		TruckType truckType = new TruckType(4L, "Large");
 		
 		t.setTruckType(truckType);
 		
 		assertEquals(truckType, t.getTruckType());
+	}
+	
+	@Test
+	void testSetTruckTypeNull() {
+		assertThrows(NullPointerException.class, () -> t.setTruckType(null));
 	}
 	
 	@Test
