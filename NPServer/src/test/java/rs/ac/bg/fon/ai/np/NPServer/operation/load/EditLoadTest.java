@@ -45,7 +45,7 @@ public class EditLoadTest {
 		LocalTime departureTime = LocalTime.of(10, 15);
 		LocalTime arrivalTime = LocalTime.of(16, 35);
 		
-		TruckLoad load = new TruckLoad(null, departureDate, arrivalDate, departureTime, arrivalTime, new BigDecimal(2.46), driver);
+		TruckLoad load = new TruckLoad(1L, departureDate, arrivalDate, departureTime, arrivalTime, new BigDecimal(2.46), driver);
 		
 		LoadItem li1 = new LoadItem(1L, load, "Chair", false, true, new BigDecimal(12.5), new BigDecimal(0.62), LoadItemState.UNCHANGED);
 		LoadItem li2 = new LoadItem(2L, load, "Table", false, true, new BigDecimal(21.5), new BigDecimal(1.31), LoadItemState.UNCHANGED);

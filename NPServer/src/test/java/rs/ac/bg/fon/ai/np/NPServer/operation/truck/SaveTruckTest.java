@@ -21,7 +21,7 @@ public class SaveTruckTest {
 		Manufacturer truckManufacturer = new Manufacturer(1L, "Scania", truckManufacturerCountryOfOrigin);
 		TruckType truckType = new TruckType(3L, "Large");
 		
-		Truck truck = new Truck(null,
+		Truck truck = new Truck(1L,
 								"Test truck",
 								450,
 								new BigDecimal(512625.50),
